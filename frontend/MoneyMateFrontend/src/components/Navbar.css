@@ -1,0 +1,30 @@
+.navbar {
+    background-color: #1B1B1B;
+    padding: 0 !important;
+}
+
+.navbar .navbar-brand {
+    margin-left: auto;
+}
+
+.navbar-brand{
+    padding-left: 50px;
+}
+.last {
+    padding-right: 50px;
+}
+
+.nav-item .nav-link {
+    color: white !important;
+}
+
+.nav-icon {
+    margin-top: 5px;
+    color: white;
+    font-size: 1rem;
+    /* Reduced size */
+    margin-left: 10px;
+    /* Adjust the margin as needed */
+    display: flex;
+    align-items: center;
+}
