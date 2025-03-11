@@ -1,0 +1,14 @@
+.HomePageDiv1 {
+    height: 100vh;
+    background-image: url("../assets/backgroundSito.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color : white;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    font-size: xx-large;
+    overflow: hidden;
+    max-height: 92.7vh;
+}
