@@ -13,6 +13,7 @@ interface ScrambleHoverProps {
     characters?: string;
     className?: string;
     scrambledClassName?: string;
+    isHovering?: boolean; // Add this prop
 }
 
 const ScrambleHover = ({
@@ -25,10 +26,10 @@ const ScrambleHover = ({
     scrambledClassName,
     sequential = false,
     revealDirection = "start",
+    isHovering = false, // Default to false
     ...props
 }: ScrambleHoverProps) => {
     const [displayText, setDisplayText] = useState(text);
-    const [isHovering, setIsHovering] = useState(false);
     const [isScrambling, setIsScrambling] = useState(false);
     const [revealedIndices] = useState(new Set<number>());
 
@@ -177,8 +178,6 @@ const ScrambleHover = ({
 
     return (
         <motion.span
-            onHoverStart={() => setIsHovering(true)}
-            onHoverEnd={() => setIsHovering(false)}
             className={cn("inline-block whitespace-pre-wrap", className)}
             {...props}
         >

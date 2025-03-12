@@ -1,5 +1,5 @@
 .HomePageDiv {
-    height: 100vh;
+    height: calc(100vh - 70px);
     background-image: url("../assets/backgroundSito.jpg");
     background-size: cover;
     background-position: center;
@@ -11,19 +11,51 @@
     justify-content: center;
     display: flex;
     align-items: center;
+    flex-direction: column;
 }
 
 .text1{
-    font-size: 42px;
-    margin-bottom: 20rem;
+    font-size: 6rem;
+    margin-bottom: 1rem;
 }
 
+.text2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+
+
 .BlackDiv {
-    background-color: black;
+    background-color: #1B1B1B;
     color: white;
     height: 100vh;
     /* Ensures the height is the full viewport height */
     display: flex;
     justify-content: center;
     align-items: center;
+    background-size: cover;
+}
+
+.buttonDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+.btnHome {
+    margin-top: 1.5rem;
+    margin-right: 1rem;
+    width: 6rem;
+    height: 4rem;
+}
+
+.centerText{
+    text-align: center;
+    
+    width: 100%;
+    background-size: auto;
+    background-position: center;
 }
