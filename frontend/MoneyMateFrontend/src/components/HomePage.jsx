@@ -3,16 +3,19 @@ import ScrambleHover from "../animations/scramble"
 
 function HomePage(){
     return (
-        <div className="HomePageDiv1">
-            <ScrambleHover
-                text={'il mio nome e diego vagnini'}
-                scrambleSpeed={40}
-                sequential={true}
-                revealDirection="start"
-                useOriginalCharsOnly={false}
-                className="font-azeretMono"
-                characters="abcdefghijklmnopqrstuvwxyz!@#$%^&*()_+-=[]{}|;':\,./<>?"
-            />
+        <div className="bigDiv">
+            <div className="HomePageDiv">
+                <ScrambleHover
+                    text={'Block Vision'}
+                    scrambleSpeed={40}
+                    sequential={true}
+                    revealDirection="start"
+                    useOriginalCharsOnly={false}
+                    className="font-azeretMono text1"
+                    characters="abcdefghijklmnopqrstuvwxyz!@#$%^&*()_+-=[]{}|;':\,./<>?"
+                />
+            </div>
+            <div className="BlackDiv"></div>
         </div>
         
     )

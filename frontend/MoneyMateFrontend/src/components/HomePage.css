@@ -1,14 +1,29 @@
-.HomePageDiv1 {
+.HomePageDiv {
     height: 100vh;
     background-image: url("../assets/backgroundSito.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin : 0;
+    padding: 0;
     color : white;
     justify-content: center;
     display: flex;
     align-items: center;
-    font-size: xx-large;
-    overflow: hidden;
-    max-height: 92.7vh;
+}
+
+.text1{
+    font-size: 42px;
+    margin-bottom: 20rem;
+}
+
+.BlackDiv {
+    background-color: black;
+    color: white;
+    height: 100vh;
+    /* Ensures the height is the full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
