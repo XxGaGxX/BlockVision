@@ -53,7 +53,7 @@ function HomePage() {
                             whileInView={{ opacity: 1, y: 0, transition: { delay: 0.4, duration: 1 } }}
                             viewport={{ once: true, amount: 1 }}
                         >
-                            Crypto
+                            <a href="/crypto">Crypto</a>
                         </motion.button>
                         <motion.button
                             className="btn btn-outline-success btnHome"
@@ -62,7 +62,7 @@ function HomePage() {
                             whileInView={{ opacity: 1, y: 0, transition: { delay: 0.4, duration: 1 } }}
                             viewport={{ once: true, amount: 1 }}
                         >
-                            News
+                            <a href="/news">News</a>
                         </motion.button>
                     </div>
 
