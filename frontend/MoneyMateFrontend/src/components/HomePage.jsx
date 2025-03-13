@@ -48,19 +48,21 @@ function HomePage() {
                     <div className="buttonDiv">
                         <motion.button
                             className="btn btn-outline-success btnHome"
+                            whileHover={{ scale : 1.1}}
                             initial={{ opacity: 0, y: 100 }}
                             whileInView={{ opacity: 1, y: 0, transition: { delay: 0.4, duration: 1 } }}
-                            viewport={{ once: false, amount: 1 }}
+                            viewport={{ once: true, amount: 1 }}
                         >
-                            Lista Cripto
+                            Crypto
                         </motion.button>
                         <motion.button
                             className="btn btn-outline-success btnHome"
+                            whileHover={{ scale: 1.1 }}
                             initial={{ opacity: 0, y: 100 }}
                             whileInView={{ opacity: 1, y: 0, transition: { delay: 0.4, duration: 1 } }}
-                            viewport={{ once: false, amount: 1 }}
+                            viewport={{ once: true, amount: 1 }}
                         >
-                            Lista Cripto
+                            News
                         </motion.button>
                     </div>
 

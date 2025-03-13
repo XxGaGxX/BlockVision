@@ -4,7 +4,7 @@ function Navbar() {
     return (
         <nav className="navbar navbar-expand-lg">
             <div className="container-fluid">
-                <a className="navbar-brand" href="#">
+                <a className="navbar-brand" href="/">
                     <img
                         src='../../public/logo.png'
                         alt="Bootstrap"
@@ -27,22 +27,22 @@ function Navbar() {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item">
-                            <a className="nav-link active" aria-current="page" href="#">
+                            <a className="nav-link active" aria-current="page" href="/crypto">
                                 Crypto
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <a className="nav-link" href="/news">
                                 News
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                            <a className="nav-link" href="/contacts">
                                 Contacts
                             </a>
                         </li>
                         <li className="nav-item last">
-                            <a className="nav-link" aria-disabled="true">
+                            <a className="nav-link" aria-disabled="true" href='/login'>
                                 <PersonFill className='nav-icon'/>
                             </a>
                         </li>
