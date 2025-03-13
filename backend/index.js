@@ -28,17 +28,11 @@ router.route("/getchart/:id/:days").get((req, res) => {
     },
   };
 
-  fetch(url, options)
+    fetch(url, options)
     .then((res) => res.json())
-    .then((json) => {
-      let htmlResponse = JSON.stringify(
-        json,
-        null,
-        2
-      );
-      res.send(htmlResponse);
-    })
-    .catch((err) => console.error(err)); 
+    .then((json) => res.send(json))
+    .catch((err) => console.error(err));
+  
   
   console.log(Date.now)
 })
@@ -54,16 +48,11 @@ router.route("/coinlist").get((req, res) => {
     },
   };
 
-  fetch(url, options)
+   fetch(url, options)
     .then((res) => res.json())
-    .then((json) => {let htmlResponse =JSON.stringify(
-      json,
-      null,
-      2
-    );
-    res.send(htmlResponse);
-    })
+    .then((json) => res.send(json))
     .catch((err) => console.error(err));
+  
 })
 
 router.route("/coindata/:id").get((req, res) => {
@@ -80,14 +69,9 @@ router.route("/coindata/:id").get((req, res) => {
 
   fetch(url, options)
     .then((res) => res.json())
-    .then((json) => {let htmlResponse = `<html><body><pre>${JSON.stringify(
-      json,
-      null,
-      2
-    )}</pre></body></html>`;
-    res.send(htmlResponse);})
+    .then((json) => res.send(json))
     .catch((err) => console.error(err));
-})
+  })
 
 
 var port = process.env.PORT || 8090;
