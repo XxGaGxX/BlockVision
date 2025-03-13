@@ -11,14 +11,15 @@ export default function Crypto() {
     const url = "http://localhost:8090/api/coinlist"
     try {
       const res = await fetch(url)
+      
       if (!res.ok) {
         console.log(":(")
-        return
       }
       const json = await res.json()
+      
       json.map((coin) => { 
-        if (coin.name.toLowerCase.startsWith == "bit") {
-          console.log(coin.name) //continua con il controllo sulla parola
+        if (coin.name.toLowerCase.startsWith == coinInput.toLocaleLowerCase) {
+          console.log(coin.name)
         }
       })
 
