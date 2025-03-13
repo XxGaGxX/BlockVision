@@ -52,6 +52,14 @@
     width: 15rem;
     height: 4rem;
     font-size: x-large;
+    color : #32CD32;
+    background-color: transparent;
+    border-color: #32CD32;
+}
+
+.btnHome:hover {
+    background-color: #32CD32;
+    color: white;
 }
 
 .centerText{
