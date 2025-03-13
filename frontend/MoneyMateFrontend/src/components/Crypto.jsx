@@ -18,7 +18,7 @@ export default function Crypto() {
       const json = await res.json()
       json.map((coin) => { 
         if (coin.name.toLowerCase.startsWith == "bit") {
-          console.log(coin.name)
+          console.log(coin.name) //continua con il controllo sulla parola
         }
       })
 
