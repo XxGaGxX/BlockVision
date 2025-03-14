@@ -12,6 +12,7 @@ import SignUp from './components/SignUp.jsx'
 import Crypto from './components/Crypto.jsx'
 import News from './components/News.jsx'
 import Contacts from './components/contacts.jsx'
+import CryptoPage from './components/CryptoCoinPage.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -24,6 +25,7 @@ createRoot(document.getElementById('root')).render(
         <Route path='/signup' element={<SignUp />}></Route>
         <Route path='/crypto' element={<Crypto />}></Route>
         <Route path='/contacts' element={<Contacts />}></Route>
+        <Route path='/crypto/:coinName' element={<CryptoPage/>}></Route>
       </Routes>
     </div>
   </BrowserRouter>,

@@ -1,0 +1,22 @@
+.CryptoCoinDiv{
+    padding: 5rem;
+    margin-top: 5rem;
+}
+
+.titleCoin{
+     display: flex;
+}
+
+.titleCoin img{
+    width: 30px;
+    height: 30px;
+}
+
+.titleCoin h4 {
+    margin-left: 0.5rem;
+    margin-top: 0.05rem;
+}
+
+.title h5 {
+    margin-top: 4rem;
+}

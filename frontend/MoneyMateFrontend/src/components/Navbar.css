@@ -1,12 +1,12 @@
+/* Navbar.css */
 .navbar {
     background-color: #1B1B1B;
 }
 
-
-
-.navbar-brand{
+.navbar-brand {
     padding-left: 50px;
 }
+
 .last {
     padding-right: 25px;
 }
@@ -23,11 +23,22 @@
     margin-top: 5px;
     color: white;
     font-size: 1rem;
-    /* Reduced size */
     margin-left: 10px;
-    /* Adjust the margin as needed */
     display: flex;
     align-items: center;
+}
+
+.dropdown-menu {
+    background-color: #444;
+    border: none;
+}
+
+.dropdown-item {
+    color: white;
+}
+
+.dropdown-item:hover {
+    background-color: #555;
 }
 
 @media (max-width: 992px) {
@@ -41,7 +52,7 @@
         text-align: center;
     }
 
-    .last{
+    .last {
         display: flex;
         padding-right: 0;
         justify-content: center;
@@ -50,5 +61,4 @@
     .nav-link {
         margin-right: 0;
     }
-
 }

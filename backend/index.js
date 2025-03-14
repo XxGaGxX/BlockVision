@@ -55,6 +55,24 @@ router.route("/coinlist").get((req, res) => {
   
 })
 
+router.route('/coinlistData').get((req, res) => {
+    const url =
+      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&price_change_percentage=1h%2C24h%2C7d&precision=2";
+      const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        "x-cg-demo-api-key": `${process.env.COINGECKO_API_KEY}`,
+      },
+    };
+
+    fetch(url, options)
+    .then((res) => res.json())
+    .then((json) => res.send(json))
+    .catch((err) => console.error(err));
+  
+})
+
 router.route("/coindata/:id").get((req, res) => {
   let coinId = req.params.id
   const url =
