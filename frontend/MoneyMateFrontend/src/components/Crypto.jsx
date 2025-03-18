@@ -18,6 +18,9 @@ export default function Crypto() {
         return
       }
       let arrayCoins = await res.json()
+      if (!Array.isArray(arrayCoins)) {
+        arrayCoins = []
+      }
       setCoins(arrayCoins)
       console.log(arrayCoins)
     } catch (e) {

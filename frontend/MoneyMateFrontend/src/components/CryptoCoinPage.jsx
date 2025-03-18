@@ -40,7 +40,6 @@ const CryptoPage = () => {
                 return
             }
             const chartData = await res.json()
-            // Assuming chartData.prices is an array of arrays [timestamp, price]
             const formattedChartData = chartData.prices.map((item) => ({
                 x: new Date(item[0]),
                 y: item[1]
