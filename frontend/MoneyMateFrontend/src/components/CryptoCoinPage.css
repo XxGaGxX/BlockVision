@@ -22,21 +22,44 @@
     color: grey;
     margin-left: 0.5rem;
     font-size: 15px;
-    /* Add some space between the name and the symbol */
 }
 
-.timeChart{
+.desc {
+    width: calc(100% - 70rem);
+    display: flex;
+    align-items: flex-start; /* Aligns content to the top */
+    margin-bottom: 2rem; /* Added margin for spacing */
+}
+
+.mainPage {
+    margin-top: 2rem;
+    display: flex;
+    align-items: start;
+    justify-content: flex-start; /* Aligned items to start, to ensure desc is at the top */
+    gap: 2rem;
+}
+
+.canvasContainer {
+    width: 70rem;
+    flex-direction: column;
+}
+
+.timeChart {
     margin-top: 2rem;
     display: flex;
     justify-content: center;
+    background-color: transparent !important;
 }
 
-
+.timeChart > a:link {
+    background-color: transparent;
+    text-decoration: none;
+    text-decoration-color: #32CD32;
+}
 
 .titleCoin img {
     width: 35px;
     height: 35px;
-    /* Opzionale: */
     vertical-align: middle;
 }
 
