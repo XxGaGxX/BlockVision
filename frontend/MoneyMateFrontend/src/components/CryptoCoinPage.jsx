@@ -107,34 +107,40 @@ const CryptoPage = () => {
                 <h4>{coinData ? coinData.name : "Loading..."} <span className="SingleSymbol">{coinData ? coinData.symbol : ""}</span></h4>
             </div>
 
-            <div className="canvasContainer">
-                <canvas id="myChart"></canvas>
+            <div className="mainPage">
+                <div className="desc">
+                    <h4>{coinData ? coinData.description.en : ""}</h4>
+                </div>
+                <div className="canvasContainer">
+                    <canvas id="myChart"></canvas>
+                    <nav aria-label="Page navigation example" className="timeChart">
+                        <ul className="pagination">
+                            <li className="page-item">
+                                <a className="page-link" href="#" onClick={() => handleTimeRangeChange(1)}>
+                                    1
+                                </a>
+                            </li>
+                            <li className="page-item">
+                                <a className="page-link" href="#" onClick={() => handleTimeRangeChange(7)}>
+                                    7
+                                </a>
+                            </li>
+                            <li className="page-item">
+                                <a className="page-link" href="#" onClick={() => handleTimeRangeChange(31)}>
+                                    31
+                                </a>
+                            </li>
+                            <li className="page-item">
+                                <a className="page-link" href="#" onClick={() => handleTimeRangeChange(365)}>
+                                    365
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
 
-            <nav aria-label="Page navigation example" className="timeChart">
-                <ul className="pagination">
-                    <li className="page-item">
-                        <a className="page-link" href="#" onClick={() => handleTimeRangeChange(1)}>
-                            1
-                        </a>
-                    </li>
-                    <li className="page-item">
-                        <a className="page-link" href="#" onClick={() => handleTimeRangeChange(7)}>
-                            7
-                        </a>
-                    </li>
-                    <li className="page-item">
-                        <a className="page-link" href="#" onClick={() => handleTimeRangeChange(31)}>
-                            31
-                        </a>
-                    </li>
-                    <li className="page-item">
-                        <a className="page-link" href="#" onClick={() => handleTimeRangeChange(365)}>
-                            365
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+
         </div>
     );
 };
