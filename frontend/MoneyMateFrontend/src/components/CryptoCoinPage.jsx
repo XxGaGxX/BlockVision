@@ -106,10 +106,9 @@ const CryptoPage = () => {
                 {coinData && <img src={coinData.image.thumb} alt={coinData.name} />}
                 <h4>{coinData ? coinData.name : "Loading..."} <span className="SingleSymbol">{coinData ? coinData.symbol : ""}</span></h4>
             </div>
-
             <div className="mainPage">
                 <div className="desc">
-                    <h4>{coinData ? coinData.description.en : ""}</h4>
+                    <h5>{coinData ? coinData.description.en : ""}</h5>
                 </div>
                 <div className="canvasContainer">
                     <canvas id="myChart"></canvas>

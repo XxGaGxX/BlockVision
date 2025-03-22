@@ -1,0 +1,1 @@
+Come si passano le props? 

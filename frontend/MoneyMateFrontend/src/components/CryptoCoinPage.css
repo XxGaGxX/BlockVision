@@ -27,8 +27,9 @@
 .desc {
     width: calc(100% - 70rem);
     display: flex;
-    align-items: flex-start; /* Aligns content to the top */
-    margin-bottom: 2rem; /* Added margin for spacing */
+    align-items: flex-start; 
+    margin-bottom: 2rem; 
+    color : whitesmoke
 }
 
 .mainPage {
