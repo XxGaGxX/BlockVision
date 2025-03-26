@@ -107,8 +107,18 @@ const CryptoPage = () => {
                 <h4>{coinData ? coinData.name : "Loading..."} <span className="SingleSymbol">{coinData ? coinData.symbol : ""}</span></h4>
             </div>
             <div className="mainPage">
-                <div className="desc">
-                    <h5>{coinData ? coinData.description.en : ""}</h5>
+                <div className="coinData col">
+                    <div className="price">
+                        <h1>{coinData ? `${coinData.market_data.current_price.usd}$` : ""}</h1></div>
+                    <div className="marketdata">
+                        <div className="marketCap">
+                            <h6>{coinData ? `Market Cap : ${coinData.market_data.market_cap.usd}$` : ""}</h6>
+                        </div>
+                        <div className="fully">
+                            <h6>{coinData ? ` Fully Diluted Valuation : ${coinData.market_data.fully_diluted_valuation.usd}$` : ""}</h6>
+                        </div>
+
+                    </div>
                 </div>
                 <div className="canvasContainer">
                     <canvas id="myChart"></canvas>

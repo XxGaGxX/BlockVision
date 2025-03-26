@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./Crypto.css"
 import { motion } from "framer-motion"
-import { Rss, Search } from 'react-bootstrap-icons'
+import { Rss, Search, Star, StarFill } from 'react-bootstrap-icons'
 import { useNavigate } from 'react-router-dom'
 
 export default function Crypto() {
@@ -28,6 +28,9 @@ export default function Crypto() {
     }
   }
 
+  function preferiti(idCoin) {
+      alert(idCoin)
+  }
   const handleInputChange = (event) => {
     setCoinInput(event.target.value)
   }
@@ -82,6 +85,7 @@ export default function Crypto() {
               <th scope='col'>7g</th>
               <th scope='col'>Volume in 24 ore</th>
               <th scope='col'>Cap. di mercato</th>
+              <th scope='col'></th>  
             </tr>
           </thead>
           <tbody>
@@ -95,6 +99,7 @@ export default function Crypto() {
                 <td>{coin.price_change_percentage_7d_in_currency?.toFixed(2)}%</td>
                 <td>{coin.total_volume} USD</td>
                 <td>{coin.market_cap} USD</td>
+                <td><Star onClick={preferiti(coin.id)}></Star></td> 
               </tr>
             ))}
             </tbody>

@@ -76,7 +76,7 @@ router.route('/coinlistData').get((req, res) => {
 router.route("/coindata/:id").get((req, res) => {
   let coinId = req.params.id
   const url =
-    `https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false`;
+    `https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`;
   const options = {
     method: "GET",
     headers: {

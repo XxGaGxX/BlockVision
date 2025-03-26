@@ -5,7 +5,7 @@
 }
 
 .CryptoCoinDiv {
-    padding: 5rem;
+    padding: 5rem 10rem 5rem 10rem;
     background-color: #141414;
     width: 100%;
     min-height: 100vh;
@@ -24,12 +24,16 @@
     font-size: 15px;
 }
 
-.desc {
-    width: calc(100% - 70rem);
+.coinData {
+        width: calc(100% - 70rem);
+        color: whitesmoke
+}
+
+.price {
+
     display: flex;
-    align-items: flex-start; 
+    justify-content: left;
     margin-bottom: 2rem; 
-    color : whitesmoke
 }
 
 .mainPage {
