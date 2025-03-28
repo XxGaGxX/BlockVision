@@ -13,14 +13,18 @@ import Crypto from './components/Crypto.jsx'
 import News from './components/News.jsx'
 import Contacts from './components/contacts.jsx'
 import CryptoPage from './components/CryptoCoinPage.jsx'
+import Nft from './components/nft.jsx'
 
 function MainApp() {
   const location = useLocation();
 
+  // Rotte in cui la navbar non deve essere mostrata
+  const noNavbarRoutes = ['/login', '/signup'];
+
   return (
     <div className="mainDiv">
-      {/* Mostra la navbar solo se non sei nella rotta /login */}
-      {location.pathname !== '/login' && <Navbar />}
+      {/* Mostra la navbar solo se la rotta corrente non è inclusa in noNavbarRoutes */}
+      {!noNavbarRoutes.includes(location.pathname) && <Navbar />}
       <Routes>
         <Route path='/' element={<HomePage />}></Route>
         <Route path='/login' element={<Login />}></Route>
@@ -29,6 +33,7 @@ function MainApp() {
         <Route path='/crypto' element={<Crypto />}></Route>
         <Route path='/contacts' element={<Contacts />}></Route>
         <Route path='/crypto/:coinName' element={<CryptoPage />}></Route>
+        <Route path='/nft' element={<Nft />}></Route>
       </Routes>
     </div>
   );

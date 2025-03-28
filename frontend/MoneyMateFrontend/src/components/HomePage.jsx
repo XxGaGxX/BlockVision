@@ -54,11 +54,22 @@ function HomePage() {
                             </motion.button>
                         </a>
 
-                        <a href="/news">
+                        <a href="/crypto">
                             <motion.button
                                 className="btn btn-outline-success btnHome"
                                 initial={{ opacity: 0, y: 100 }}
                                 whileInView={{ opacity: 1, y: 0, transition: { delay: 0.6, duration: 1 } }}
+                                viewport={{ once: false, amount: 1 }}
+                            >
+                                NFT
+                            </motion.button>
+                        </a>
+
+                        <a href="/news">
+                            <motion.button
+                                className="btn btn-outline-success btnHome"
+                                initial={{ opacity: 0, y: 100 }}
+                                whileInView={{ opacity: 1, y: 0, transition: { delay: 0.8, duration: 1 } }}
                                 viewport={{ once: false, amount: 1 }}
                             >
                                 News

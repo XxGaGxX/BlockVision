@@ -4,12 +4,22 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: #141414 !important;
+    /* Stesso colore di .CryptoCoinDiv */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .CryptoCoinDiv {
     padding: 5rem 10rem 5rem 10rem;
-    background-color: #141414;
+    background-color: #141414 !important ; 
     width: 100%;
     min-height: 100vh;
 }
+
+
 
 .titleCoin {
     display: flex;
@@ -25,22 +35,21 @@
 }
 
 .coinData {
-        width: calc(100% - 70rem);
-        color: whitesmoke
+    width: calc(100% - 70rem);
+    color: whitesmoke;
 }
 
 .price {
-
     display: flex;
     justify-content: left;
-    margin-bottom: 2rem; 
+    margin-bottom: 2rem;
 }
 
 .mainPage {
     margin-top: 2rem;
     display: flex;
     align-items: start;
-    justify-content: flex-start; /* Aligned items to start, to ensure desc is at the top */
+    justify-content: flex-start;
     gap: 2rem;
 }
 
@@ -56,7 +65,7 @@
     background-color: transparent !important;
 }
 
-.timeChart > a:link {
+.timeChart>a:link {
     background-color: transparent;
     text-decoration: none;
     text-decoration-color: #32CD32;
@@ -80,8 +89,56 @@
     padding: 0;
 }
 
-@media (max-width: 768px) {
+tr {
+    background-color: #141414 !important;
+    /* Sfondo scuro per ogni riga */
+    border-bottom: 1px solid #32CD32 !important;
+    /* Linea verde sotto ogni riga */
+    width: 50%;
+    /* Riduce la lunghezza delle righe */
+    margin: 0 auto;
+    /* Centra le righe */
+    margin-bottom: 4rem;
+    /* Aumenta lo spazio tra le righe */
+}
+
+tr:last-child {
+    border-bottom: none;
+    /* Rimuove la linea sotto l'ultima riga */
+    margin-bottom: 0;
+    /* Rimuove lo spazio extra sotto l'ultima riga */
+}
+
+td,
+th {
+    padding: 1rem 0;
+    /* Aggiunge spazio sopra e sotto il testo */
+    color: whitesmoke;
+    /* Colore del testo chiaro per leggibilità */
+    text-align: left;
+    /* Allinea il testo a sinistra */
+}
+
+td {
+    width: 4rem;
+}
+
+.table>:not(caption)>*>* {
+    background-color: #141414;
+    color: white;
+}
+
+.mainPage {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    /* Rimuove lo spazio tra le colonne */
+}
+
+
+
+/* @media (max-width: 768px) {
     .CryptoCoinDiv {
         padding: 2rem;
     }
-}
+} */

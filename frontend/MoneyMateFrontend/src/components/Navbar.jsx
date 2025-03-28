@@ -32,6 +32,11 @@ function Navbar() {
                             </a>
                         </li>
                         <li className="nav-item">
+                            <a className="nav-link active" aria-current="page" href="/nft">
+                                NFT
+                            </a>
+                        </li>
+                        <li className="nav-item">
                             <a className="nav-link" href="/news">
                                 News
                             </a>
