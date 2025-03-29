@@ -82,7 +82,7 @@ export default function Crypto() {
         <div className="tableDiv">
           <table className="table-dark">
             <thead>
-              <tr>
+              <tr className=''>
                 <th scope="col">#</th>
                 <th scope="col">Moneta</th>
                 <th scope="col">Prezzo</th>

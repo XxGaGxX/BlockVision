@@ -1,16 +1,74 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState } from 'react';
 import './signup.css'
+import { AuthContext } from '../auth/AuthContext';
+import { useNavigate } from 'react-router';
+import CryptoJS from "crypto-js";
 
   function SignUp() {
     const [isShowed, setisShowed] = useState(false);
-
+    const {setIsLogged} = useContext(AuthContext)
+    let Nome = ''
+    let Cognome = ''
+    let Email = ''
+    let Password = ''
+    let CheckPassword = ''
+    const navigate = useNavigate()
     function handleCheckPassword() {
       setisShowed(!isShowed);
     }
 
-    function handleSignUp() {
+    async function handleSignUp(event) {
+      event.preventDefault(); // Impedisce il comportamento predefinito del form
 
+      let Nome = document.getElementById('nome').value;
+      let Cognome = document.getElementById('Cognome').value;
+      let Email = document.getElementById('Mail').value;
+      let Password = document.getElementById('Password').value;
+      let CheckPassword = document.getElementById('CheckPassword').value;
+
+      if (Password === CheckPassword) {
+        const now = new Date();
+        const DataIscrizione = now.toISOString().slice(0, 19).replace('T', ' '); // Formatta come 'YYYY-MM-DD HH:MM:SS'
+
+        Password = CryptoJS.SHA256(Password).toString(CryptoJS.enc.Hex);
+        console.log(Password);
+
+        const data = {
+          Nome,
+          Cognome,
+          Email,
+          Password,
+          DataIscrizione,
+        };
+
+        console.log(JSON.stringify(data));
+
+        try {
+          const response = await fetch('http://localhost:8090/api/account', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          });
+
+          if (response.ok) {
+            const result = await response.json();
+            console.log(result);
+            alert('Registrazione completata con successo!');
+            setIsLogged(true)
+            navigate('/')
+          } else {
+            alert('Errore durante la registrazione.');
+          }
+        } catch (error) {
+          console.error(error);
+          alert('Errore di rete.');
+        }
+      } else {
+        alert('Le password devono essere identiche');
+      }
     }
 
     return (
@@ -26,18 +84,18 @@ import './signup.css'
                   Nome
                 </label>
                 <input
-                  type="email"
+                  type="text"
                   className="form-control"
-                  id="exampleInputEmail1"
+                  id='nome'
                   aria-describedby="emailHelp"
                 />
                 <label htmlFor="exampleInputEmail1" className="form-label">
                   Cognome
                 </label>
                 <input
-                  type="email"
+                  type="text"
                   className="form-control"
-                  id="exampleInputEmail1"
+                  id="Cognome"
                   aria-describedby="emailHelp"
                 />
               </div>
@@ -48,16 +106,7 @@ import './signup.css'
                 <input
                   type="email"
                   className="form-control"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                />
-                <label htmlFor="exampleInputEmail1" className="form-label">
-                  Conferma indirizzo Mail
-                </label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="exampleInputEmail1"
+                  id="Mail"
                   aria-describedby="emailHelp"
                 />
               </div>
@@ -68,7 +117,7 @@ import './signup.css'
                 <input
                   type={isShowed ? 'text' : 'password'}
                   className="form-control"
-                  id="exampleInputPassword1"
+                  id="Password"
                 />
                 <label htmlFor="exampleInputPassword1" className="form-label">
                   Conferma Password
@@ -76,7 +125,7 @@ import './signup.css'
                 <input
                   type={isShowed ? 'text' : 'password'}
                   className="form-control"
-                  id="exampleInputPassword1"
+                  id="CheckPassword"
                 />
               </div>
               <div className="mb-3 form-check">
@@ -91,7 +140,7 @@ import './signup.css'
                 </label>
               </div>
               <div className="divButton">
-                <button type="submit" className="btn btn-primary" onClick={handleSignUp}>
+                <button  className="btn btn-primary" onClick={handleSignUp}>
                   Registrati
                 </button>
 

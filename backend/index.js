@@ -4,6 +4,7 @@ var cors = require("cors");
 var app = express();
 var router = express.Router();
 require("dotenv").config();
+var Db = require("./dbcrud");
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -89,8 +90,33 @@ router.route("/coindata/:id").get((req, res) => {
     .then((res) => res.json())
     .then((json) => res.send(json))
     .catch((err) => console.error(err));
-  })
+  }
+)
 
+router.route('/getaccounts').get((req, res) => {
+  Db.getElencoAccount().then((data) => {
+    res.json(data[0])
+  })
+})
+
+router.route('/account').post((req, res) => {
+  console.log("POST AVVENUTO")
+  let nuovoAccount = { ...req.body }
+  // console.log(nuovoAccount)
+  Db.aggiungiAccount(nuovoAccount).then((data) => {
+    res.status(201).json(data)
+  })
+})
+
+router.route('/login').post((req, res) => {
+  // console.log(req.body)
+  let email = req.body.emailForm
+  let password = req.body.passwordForm
+  Db.Login(email, password).then((data) => {
+    res.status(201).json(data)
+    console.log(data)
+  })
+})
 
 
 var port = process.env.PORT || 8090;

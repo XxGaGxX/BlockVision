@@ -120,36 +120,36 @@ const CryptoPage = () => {
                     <div className="marketdata">
                         <table className="table">
                             <tbody>
-                                <tr>
-                                    <td>
+                                <tr className="tr">
+                                    <td className="td">
                                         {coinData
                                             ? `Market Cap: ${coinData.market_data.market_cap.usd}$`
                                             : "Loading..."}
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
+                                <tr className="tr">
+                                    <td className="td">
                                         {coinData
                                             ? `Fully Diluted Valuation: ${coinData.market_data.fully_diluted_valuation.usd}$`
                                             : "Loading..."}
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
+                                <tr className="tr">
+                                    <td className="td">
                                         {coinData
                                             ? `Circulating Supply: ${coinData.market_data.circulating_supply}$`
                                             : "Loading..."}
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
+                                <tr className="tr">
+                                    <td className="td">
                                         {coinData
                                             ? `Max Supply: ${coinData.market_data.max_supply}$`
                                             : "Loading..."}
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
+                                <tr className="tr">
+                                    <td className="td">
                                         {coinData
                                             ? `Total Supply: ${coinData.market_data.total_supply}$`
                                             : "Loading..."}

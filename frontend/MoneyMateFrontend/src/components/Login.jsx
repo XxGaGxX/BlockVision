@@ -1,21 +1,63 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './login.css';
+import CryptoJS from 'crypto-js';
+import { useNavigate } from 'react-router';
+import { AuthContext } from '../auth/AuthContext';
 
 export default function Login() {
   const [isShowed, setisShowed] = useState(false);
+  const { setIsLogged } = useContext(AuthContext)
+  const navigate = useNavigate()
+  let emailForm = ''
+  let passwordForm = ''
 
   function handleCheckPassword() {
       setisShowed(!isShowed);
   }
 
-  function handleSignIn() {
-    const emailForm = document.getElementById("exampleInputEmail1").value
-    const passwordForm = document.getElementById("exampleInputPassword1").value
+  async function handleSignIn(event) {
+    event.preventDefault()
+    
+    emailForm = document.getElementById("exampleInputEmail1").value
+    passwordForm = document.getElementById("exampleInputPassword1").value
     // alert(`${emailForm} ${passwordForm}`)
     if (emailForm == '' || passwordForm == '') {
       alert('Riempire tutti i campi')
     } else {
-      //logica get
+      passwordForm = CryptoJS.SHA256(passwordForm).toString(CryptoJS.enc.Hex);
+      const data = {
+        emailForm,
+        passwordForm
+      }
+      
+      try {
+        const response = await fetch('http://localhost:8090/api/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        })
+
+        const data1 = await response.json()
+        console.log(data1)
+        
+        console.log(data1[0][0].Password)
+        
+
+        if (data1[0][0].Password == passwordForm) {
+          alert('Login avvenuto')
+          setIsLogged(true)
+          navigate('/')
+
+        } else {
+          alert('password errata')
+        }
+        
+      } catch (error) {
+        console.error(error)
+      }
+      
     }
   }
 

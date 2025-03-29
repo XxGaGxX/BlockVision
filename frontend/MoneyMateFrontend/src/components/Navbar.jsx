@@ -1,6 +1,14 @@
 import './Navbar.css'
-import { Person, PersonFill } from 'react-bootstrap-icons'
+import { Person, PersonFill, BoxArrowRight } from 'react-bootstrap-icons'
+import { AuthContext } from '../auth/AuthContext'
+import { useContext } from 'react'
+
+
 function Navbar() {
+
+    const { isLogged } = useContext(AuthContext)
+    const {setIsLogged} = useContext(AuthContext)
+
     return (
         <nav className="navbar navbar-expand-lg">
             <div className="container-fluid">
@@ -47,9 +55,18 @@ function Navbar() {
                             </a>
                         </li>
                         <li className="nav-item last">
-                            <a className="nav-link" aria-disabled="true" href='/login'>
+                            {/* <a className="nav-link" aria-disabled="true" href='/login'>
                                 <PersonFill className='nav-icon'/>
-                            </a>
+                            </a> */}
+                            {isLogged ? (
+                                <a className="nav-link" aria-disabled="true" href=''>
+                                    <BoxArrowRight className='nav-icon' onClick={() => {setIsLogged(false)}}/>
+                                </a>
+                            ) : (
+                                    <a className="nav-link" aria-disabled="true" href='/login'>
+                                        <PersonFill className='nav-icon' />
+                                    </a>     
+                            )}
                         </li>
                     </ul>
                 </div>

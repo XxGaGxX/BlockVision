@@ -89,7 +89,7 @@ body {
     padding: 0;
 }
 
-tr {
+.tr {
     background-color: #141414 !important;
     /* Sfondo scuro per ogni riga */
     border-bottom: 1px solid #32CD32 !important;
@@ -102,15 +102,15 @@ tr {
     /* Aumenta lo spazio tra le righe */
 }
 
-tr:last-child {
+.tr:last-child {
     border-bottom: none;
     /* Rimuove la linea sotto l'ultima riga */
     margin-bottom: 0;
     /* Rimuove lo spazio extra sotto l'ultima riga */
 }
 
-td,
-th {
+.td,
+.th {
     padding: 1rem 0;
     /* Aggiunge spazio sopra e sotto il testo */
     color: whitesmoke;
@@ -119,7 +119,7 @@ th {
     /* Allinea il testo a sinistra */
 }
 
-td {
+.td {
     width: 4rem;
 }
 

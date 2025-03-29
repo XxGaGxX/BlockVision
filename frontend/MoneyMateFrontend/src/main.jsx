@@ -14,6 +14,7 @@ import News from './components/News.jsx'
 import Contacts from './components/contacts.jsx'
 import CryptoPage from './components/CryptoCoinPage.jsx'
 import Nft from './components/nft.jsx'
+import { AuthProvider } from './auth/AuthContext.jsx'
 
 function MainApp() {
   const location = useLocation();
@@ -23,18 +24,19 @@ function MainApp() {
 
   return (
     <div className="mainDiv">
-      {/* Mostra la navbar solo se la rotta corrente non è inclusa in noNavbarRoutes */}
-      {!noNavbarRoutes.includes(location.pathname) && <Navbar />}
-      <Routes>
-        <Route path='/' element={<HomePage />}></Route>
-        <Route path='/login' element={<Login />}></Route>
-        <Route path='/news' element={<News />}></Route>
-        <Route path='/signup' element={<SignUp />}></Route>
-        <Route path='/crypto' element={<Crypto />}></Route>
-        <Route path='/contacts' element={<Contacts />}></Route>
-        <Route path='/crypto/:coinName' element={<CryptoPage />}></Route>
-        <Route path='/nft' element={<Nft />}></Route>
-      </Routes>
+      <AuthProvider>
+        {!noNavbarRoutes.includes(location.pathname) && <Navbar />}
+        <Routes>
+          <Route path='/' element={<HomePage />}></Route>
+          <Route path='/login' element={<Login />}></Route>
+          <Route path='/news' element={<News />}></Route>
+          <Route path='/signup' element={<SignUp />}></Route>
+          <Route path='/crypto' element={<Crypto />}></Route>
+          <Route path='/contacts' element={<Contacts />}></Route>
+          <Route path='/crypto/:coinName' element={<CryptoPage />}></Route>
+          <Route path='/nft' element={<Nft />}></Route>
+        </Routes>
+      </AuthProvider>
     </div>
   );
 }
