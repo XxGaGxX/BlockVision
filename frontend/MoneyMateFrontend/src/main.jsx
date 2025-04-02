@@ -15,11 +15,12 @@ import Contacts from './components/contacts.jsx'
 import CryptoPage from './components/CryptoCoinPage.jsx'
 import Nft from './components/nft.jsx'
 import { AuthProvider } from './auth/AuthContext.jsx'
+// import { AuthContext } from '../auth/AuthContext'
+// import { useContext } from 'react'
 
 function MainApp() {
   const location = useLocation();
 
-  // Rotte in cui la navbar non deve essere mostrata
   const noNavbarRoutes = ['/login', '/signup'];
 
   return (

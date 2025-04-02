@@ -4,9 +4,9 @@ import { Rss, Search, Star, StarFill } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
 
 export default function Crypto() {
-  const [coinInput, setCoinInput] = useState("");
   const [coins, setCoins] = useState([]);
-  const [favorites, setFavorites] = useState([]); // Stato per le monete preferite
+  const [favorites, setFavorites] = useState([]); 
+  const [searchResult, setSearchResult] = useState([])
   const navigate = useNavigate();
 
   async function FetchCoins() {
@@ -22,23 +22,31 @@ export default function Crypto() {
         arrayCoins = [];
       }
       setCoins(arrayCoins);
-      console.log(arrayCoins);
+      console.log(arrayCoins)
     } catch (e) {
       console.error(e);
     }
   }
 
   function toggleFavorite(idCoin) {
-    // Aggiungi o rimuovi la moneta dai preferiti
     setFavorites((prevFavorites) =>
       prevFavorites.includes(idCoin)
-        ? prevFavorites.filter((id) => id !== idCoin) // Rimuovi dai preferiti
-        : [...prevFavorites, idCoin] // Aggiungi ai preferiti
+        ? prevFavorites.filter((id) => id !== idCoin) 
+        : [...prevFavorites, idCoin] 
     );
   }
 
-  const handleInputChange = (event) => {
-    setCoinInput(event.target.value);
+  const  handleInputChange = (event) => {
+    const search = event.target.value.trim()
+    if (search != "" || search == " ") {
+      console.log(search)
+      const filteredCoins = coins.filter(item =>
+        item.name.toLowerCase().startsWith(search.toLowerCase())
+      )
+      setSearchResult(filteredCoins)
+    } else {
+      setSearchResult([])
+    }
   };
 
   const handleRowClick = (coinId) => {
@@ -73,6 +81,12 @@ export default function Crypto() {
           </button>
         </div>
       </div>
+
+      {searchResult.length > 0 ? <div className="searchResult" >
+        {searchResult.map((searchCoin, index) => (
+          <p className='searchcoin' onClick={() => {handleRowClick(searchCoin.id)}}><img src={searchCoin.image} alt="" /> {searchCoin.name} {searchCoin.current_price}</p>
+        ))}
+      </div> : ""}
 
       <div className="cryptoList">
         <div className="text">

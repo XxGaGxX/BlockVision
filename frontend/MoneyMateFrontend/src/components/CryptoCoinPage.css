@@ -1,3 +1,4 @@
+/* Reset di base */
 * {
     margin: 0;
     padding: 0;
@@ -6,69 +7,27 @@
 
 body {
     background-color: #141414 !important;
-    /* Stesso colore di .CryptoCoinDiv */
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    color: white;
 }
 
+/* Contenitore principale */
 .CryptoCoinDiv {
-    padding: 5rem 10rem 5rem 10rem;
-    background-color: #141414 !important ; 
+    padding: 5rem 7rem;
+    background-color: #141414 !important;
     width: 100%;
     min-height: 100vh;
 }
 
-
-
+/* Titolo della moneta */
 .titleCoin {
     display: flex;
     align-items: center;
     color: white;
-}
-
-.SingleSymbol {
-    text-transform: uppercase;
-    color: grey;
-    margin-left: 0.5rem;
-    font-size: 15px;
-}
-
-.coinData {
-    width: calc(100% - 70rem);
-    color: whitesmoke;
-}
-
-.price {
-    display: flex;
-    justify-content: left;
     margin-bottom: 2rem;
-}
-
-.mainPage {
-    margin-top: 2rem;
-    display: flex;
-    align-items: start;
-    justify-content: flex-start;
-    gap: 2rem;
-}
-
-.canvasContainer {
-    width: 70rem;
-    flex-direction: column;
-}
-
-.timeChart {
-    margin-top: 2rem;
-    display: flex;
-    justify-content: center;
-    background-color: transparent !important;
-}
-
-.timeChart>a:link {
-    background-color: transparent;
-    text-decoration: none;
-    text-decoration-color: #32CD32;
+    font-size: 1.5rem;
 }
 
 .titleCoin img {
@@ -84,61 +43,149 @@ body {
     line-height: 1.2;
 }
 
-.titleCoin h5 {
-    margin: 0;
-    padding: 0;
+.SingleSymbol {
+    text-transform: uppercase;
+    color: grey;
+    margin-left: 0.5rem;
+    font-size: 1rem;
 }
 
-.tr {
-    background-color: #141414 !important;
-    /* Sfondo scuro per ogni riga */
-    border-bottom: 1px solid #32CD32 !important;
-    /* Linea verde sotto ogni riga */
-    width: 50%;
-    /* Riduce la lunghezza delle righe */
-    margin: 0 auto;
-    /* Centra le righe */
-    margin-bottom: 4rem;
-    /* Aumenta lo spazio tra le righe */
+/* Prezzo */
+.price {
+    display: flex;
+    justify-content: left;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    color: #32CD32;
+    font-weight: bold;
 }
 
-.tr:last-child {
-    border-bottom: none;
-    /* Rimuove la linea sotto l'ultima riga */
-    margin-bottom: 0;
-    /* Rimuove lo spazio extra sotto l'ultima riga */
+/* Layout principale */
+.mainPage {
+    margin-top: 2rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
 }
 
-.td,
-.th {
-    padding: 1rem 0;
-    /* Aggiunge spazio sopra e sotto il testo */
+/* Dati di mercato */
+.coinData {
+    flex: 1;
+    min-width: 300px;
+    max-width: 35%;
     color: whitesmoke;
-    /* Colore del testo chiaro per leggibilità */
-    text-align: left;
-    /* Allinea il testo a sinistra */
+    background-color: #1a1a1a;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.td {
-    width: 4rem;
+/* Grafico */
+.canvasContainer {
+    flex: 2;
+    min-width: 300px;
+    max-width: 60%;
+    background-color: #1a1a1a;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Navigazione del grafico */
+.timeChart {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    background-color: transparent !important;
+}
+
+.timeChart a {
+    background-color: #32CD32;
+    color: #141414;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.timeChart a:hover {
+    background-color: #28a745;
+    color: white;
+}
+
+/* Tabella */
 .table>:not(caption)>*>* {
     background-color: #141414;
     color: white;
 }
 
-.mainPage {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0;
-    /* Rimuove lo spazio tra le colonne */
+.tr {
+    background-color: #141414 !important;
+    border-bottom: 1px solid #32CD32 !important;
+    width: 100%;
+    margin-bottom: 1rem;
 }
 
+.tr:last-child {
+    border-bottom: none;
+}
 
+.td,
+.th {
+    padding: 1rem 0;
+    color: whitesmoke;
+    text-align: left;
+}
 
-/* @media (max-width: 768px) {
+.td {
+    width: auto;
+}
+
+.table > .tr  {
+    background-color: #141414 !important;
+}
+
+/* Media query per dispositivi mobili */
+@media (max-width: 768px) {
     .CryptoCoinDiv {
         padding: 2rem;
     }
-} */
+
+    .mainPage {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .titleCoin {
+        order: -2;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+    }
+
+    .price {
+        order: -1;
+        margin-bottom: 1rem;
+        text-align: center;
+        font-size: 2rem;
+    }
+
+    .canvasContainer {
+        width: 100%;
+        order: 0;
+        margin-bottom: 1rem;
+    }
+
+    .coinData {
+        width: 100%;
+        order: 1;
+    }
+
+    .timeChart a {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+}

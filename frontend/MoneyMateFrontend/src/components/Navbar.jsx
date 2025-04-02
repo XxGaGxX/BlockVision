@@ -55,9 +55,7 @@ function Navbar() {
                             </a>
                         </li>
                         <li className="nav-item last">
-                            {/* <a className="nav-link" aria-disabled="true" href='/login'>
-                                <PersonFill className='nav-icon'/>
-                            </a> */}
+
                             {isLogged ? (
                                 <a className="nav-link" aria-disabled="true" href=''>
                                     <BoxArrowRight className='nav-icon' onClick={() => {setIsLogged(false)}}/>

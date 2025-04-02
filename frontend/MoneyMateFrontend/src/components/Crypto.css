@@ -1,12 +1,11 @@
 .mainDiv1 {
+    position: relative;
     padding-top: 4rem;
     background-color: #141414;
     color: white;
     width: 100%;
     min-height: 100vh;
-    /* Ensure it covers at least the viewport height */
     height: auto;
-    /* Allow the content to expand beyond the viewport height if needed */
 }
 
 .searchbar {
@@ -20,16 +19,13 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 2rem;
-    /* Add some space below the title */
 }
 
 .coinImg {
     width: 30px;
     height: 30px;
     margin-right: 10px;
-    /* Add some space between the image and the title */
     vertical-align: middle;
-    /* Align the image vertically with the text */
 }
 
 .input-group {
@@ -38,7 +34,6 @@
     align-items: center;
     width: 100%;
     max-width: 650px;
-    /* Limit the width of the input group */
 }
 
 .form-control {
@@ -61,41 +56,59 @@
 
 .table-dark {
     background-color: #141414;
-    /* Set the same background color as mainDiv1 */
     color: white;
     width: 100%;
 }
 
-
-
-
 .table-dark tbody tr {
     height: 70px;
-    /* Increase the height of the rows */
     padding: 10px 0;
-    /* Add padding to the rows */
     transition: background-color 0.3s;
 }
 
 .table-dark tbody tr:hover {
     background-color: #1f1f1f;
-    /* Set a contrasting color for hover */
     cursor: pointer;
 }
 
 .symbol {
     text-transform: uppercase;
-    /* Transform text to uppercase */
     color: #858585;
-    /* Set a different color for the symbol */
 }
 
-.tableDiv{
+.tableDiv {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-tr{
+tr {
     border-color: grey;
+}
+
+.searchResult {
+    position: absolute;
+    top: 220px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 650px;
+    background-color: #141414;
+    z-index: 10;
+    border: 1px solid #32CD32;
+    border-radius: 5px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.searchResult img {
+    width: 2rem;
+    margin-right: 0.5rem;
+}
+
+.searchResult :hover {
+    background-color: #3b3b3b;
+    cursor: pointer;
 }

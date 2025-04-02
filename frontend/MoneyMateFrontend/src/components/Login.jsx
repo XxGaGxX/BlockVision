@@ -46,7 +46,6 @@ export default function Login() {
         
 
         if (data1[0][0].Password == passwordForm) {
-          alert('Login avvenuto')
           setIsLogged(true)
           navigate('/')
 
@@ -55,7 +54,7 @@ export default function Login() {
         }
         
       } catch (error) {
-        console.error(error)
+      
       }
       
     }

@@ -111,9 +111,54 @@ const CryptoPage = () => {
                     <span className="SingleSymbol">{coinData ? coinData.symbol : ""}</span>
                 </h4>
             </div>
-            <div className="mainPage row">
+            <div className="mainPage">
+                {/* Colonna per il grafico */}
+                <div className="canvasContainer">
+                    <canvas id="myChart"></canvas>
+                    <nav aria-label="Page navigation example" className="timeChart">
+                        <ul className="pagination">
+                            <li className="page-item">
+                                <a
+                                    className="page-link"
+                                    href="#"
+                                    onClick={() => handleTimeRangeChange(1)}
+                                >
+                                    1
+                                </a>
+                            </li>
+                            <li className="page-item">
+                                <a
+                                    className="page-link"
+                                    href="#"
+                                    onClick={() => handleTimeRangeChange(7)}
+                                >
+                                    7
+                                </a>
+                            </li>
+                            <li className="page-item">
+                                <a
+                                    className="page-link"
+                                    href="#"
+                                    onClick={() => handleTimeRangeChange(31)}
+                                >
+                                    31
+                                </a>
+                            </li>
+                            <li className="page-item">
+                                <a
+                                    className="page-link"
+                                    href="#"
+                                    onClick={() => handleTimeRangeChange(365)}
+                                >
+                                    365
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
                 {/* Colonna per i dati della moneta */}
-                <div className="coinData col-12 col-md-6 p-3">
+                <div className="coinData">
                     <div className="price">
                         <h1>{coinData ? `${coinData.market_data.current_price.usd}$` : ""}</h1>
                     </div>
@@ -159,51 +204,7 @@ const CryptoPage = () => {
                         </table>
                     </div>
                 </div>
-                {/* Colonna per il grafico */}
-                <div className="canvasContainer col-12 col-md-6">
-                    <canvas id="myChart"></canvas>
-                    <nav aria-label="Page navigation example" className="timeChart">
-                        <ul className="pagination">
-                            <li className="page-item">
-                                <a
-                                    className="page-link"
-                                    href="#"
-                                    onClick={() => handleTimeRangeChange(1)}
-                                >
-                                    1
-                                </a>
-                            </li>
-                            <li className="page-item">
-                                <a
-                                    className="page-link"
-                                    href="#"
-                                    onClick={() => handleTimeRangeChange(7)}
-                                >
-                                    7
-                                </a>
-                            </li>
-                            <li className="page-item">
-                                <a
-                                    className="page-link"
-                                    href="#"
-                                    onClick={() => handleTimeRangeChange(31)}
-                                >
-                                    31
-                                </a>
-                            </li>
-                            <li className="page-item">
-                                <a
-                                    className="page-link"
-                                    href="#"
-                                    onClick={() => handleTimeRangeChange(365)}
-                                >
-                                    365
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
+            </div>            
         </div>
     );
 };
