@@ -4,6 +4,8 @@ import { Rss, Search, Star, StarFill } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../auth/AuthContext';
 
+//TODO: bisogna decidere quale scegliere, o cosi o con il trending, forse sarebbe meglio che sia una parte della Home page
+
 export default function Crypto() {
   const { setFavoritesCoins } = useContext(AuthContext)
   const [coins, setCoins] = useState([]);
@@ -37,8 +39,10 @@ export default function Crypto() {
         : [...prevFavorites, idCoin]; 
 
       console.log("New Favorites:", newFavorites); 
-      setFavoritesCoins(newFavorites)
+      
     });
+
+    setFavoritesCoins(newFavorites)
   }
 
   const  handleInputChange = (event) => {
@@ -67,7 +71,7 @@ export default function Crypto() {
   }, [favorites]);
 
   return (
-    <div className="mainDiv1">
+    <div className="mainDiv1"> 
       <div className="title">
         <h1>Cerca una cripto valuta</h1>
       </div>

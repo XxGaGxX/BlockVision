@@ -38,6 +38,38 @@ router.route("/getchart/:id/:days").get((req, res) => {
   console.log(Date.now)
 })
 
+router.route("/nft").get((req, res) => {
+  const url = "https://api.coingecko.com/api/v3/nfts/list";
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      "x-cg-demo-api-key": `${process.env.COINGECKO_API_KEY}`,
+    },
+  };
+
+  fetch(url, options)
+    .then((res) => res.json())
+    .then((json) => res.send(json))
+    .catch((err) => console.error(err));
+})
+
+router.route('/trend').get((req, res) => {
+    const url = " https://api.coingecko.com/api/v3/search/trending";
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        "x-cg-demo-api-key": `${process.env.COINGECKO_API_KEY}`,
+      },
+    };
+
+    fetch(url, options)
+      .then((res) => res.json())
+      .then((json) => res.send(json))
+      .catch((err) => console.error(err));
+})
+
 router.route("/coinlist").get((req, res) => {
   let obj
   const url = "https://api.coingecko.com/api/v3/coins/list";

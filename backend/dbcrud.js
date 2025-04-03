@@ -11,7 +11,7 @@ async function getElencoAccount() {
   }
 }
 
-async function Login(Email, Password) {
+async function Login(Email) {
   try {
     // console.log(Email, Password)
     let pool = await sql.connect(config)
