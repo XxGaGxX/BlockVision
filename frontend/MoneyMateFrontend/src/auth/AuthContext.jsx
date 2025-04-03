@@ -10,9 +10,15 @@ export const AuthProvider = ({ children }) => {
         return storedValue === 'true'; 
     });
 
+    const [favoritesCoins, setFavoritesCoins] = useState(() => {
+        const oldFavCoins = localStorage.getItem('favoritesCoins')
+        return Array.isArray(oldFavCoins)
+    })
+
     useEffect(() => {
         localStorage.setItem('isLogged', isLogged);
-    }, [isLogged]);
+        localStorage.setItem('favoritesCoins', favoritesCoins)
+    }, [isLogged, favoritesCoins]);
 
     return (
         <AuthContext.Provider value={{ isLogged, setIsLogged }}>

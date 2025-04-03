@@ -141,6 +141,14 @@ body {
     text-align: left;
 }
 
+.links a {
+    color: #32CD32;
+}
+
+.description {
+    margin-top: 3rem;
+}
+
 .td {
     width: auto;
 }

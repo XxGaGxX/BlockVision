@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import "./Crypto.css";
 import { Rss, Search, Star, StarFill } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../auth/AuthContext';
 
 export default function Crypto() {
+  const { setFavoritesCoins } = useContext(AuthContext)
   const [coins, setCoins] = useState([]);
   const [favorites, setFavorites] = useState([]); 
   const [searchResult, setSearchResult] = useState([])
@@ -29,11 +31,14 @@ export default function Crypto() {
   }
 
   function toggleFavorite(idCoin) {
-    setFavorites((prevFavorites) =>
-      prevFavorites.includes(idCoin)
+    setFavorites((prevFavorites) => {
+      const newFavorites = prevFavorites.includes(idCoin)
         ? prevFavorites.filter((id) => id !== idCoin) 
-        : [...prevFavorites, idCoin] 
-    );
+        : [...prevFavorites, idCoin]; 
+
+      console.log("New Favorites:", newFavorites); 
+      setFavoritesCoins(newFavorites)
+    });
   }
 
   const  handleInputChange = (event) => {
@@ -56,6 +61,10 @@ export default function Crypto() {
   useEffect(() => {
     FetchCoins();
   }, []);
+
+  useEffect(() => {
+    console.log("Favorites updated:", favorites);
+  }, [favorites]);
 
   return (
     <div className="mainDiv1">

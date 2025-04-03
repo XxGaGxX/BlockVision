@@ -204,35 +204,138 @@ const CryptoPage = () => {
                         </table>
                     </div>
                 </div>
-            </div>            
+            </div>
+
+            {/* Descrizione */}
+            <div className="description">
+                <h2>Descrizione</h2>
+                <p>{coinData?.description?.en || "Nessuna descrizione disponibile."}</p>
+            </div>
+
+            {/* Link utili */}
+            <div className="links">
+                <h2>Link utili</h2>
+                <ul>
+                    {coinData?.links?.homepage[0] && (
+                        <li>
+                            <a href={coinData.links.homepage[0]} target="_blank" rel="noopener noreferrer">
+                                Sito ufficiale
+                            </a>
+                        </li>
+                    )}
+                    {coinData?.links?.whitepaper && (
+                        <li>
+                            <a href={coinData.links.whitepaper} target="_blank" rel="noopener noreferrer">
+                                Whitepaper
+                            </a>
+                        </li>
+                    )}
+                    {coinData?.links?.blockchain_site?.length > 0 && (
+                        <li>
+                            <strong>Blockchain Explorer:</strong>
+                            <ul>
+                                {coinData.links.blockchain_site.map((link, index) =>
+                                    link ? (
+                                        <li key={index}>
+                                            <a href={link} target="_blank" rel="noopener noreferrer">
+                                                {link}
+                                            </a>
+                                        </li>
+                                    ) : null
+                                )}
+                            </ul>
+                        </li>
+                    )}
+                    {coinData?.links?.subreddit_url && (
+                        <li>
+                            <a href={coinData.links.subreddit_url} target="_blank" rel="noopener noreferrer">
+                                Subreddit
+                            </a>
+                        </li>
+                    )}
+                    {coinData?.links?.repos_url?.github?.length > 0 && (
+                        <li>
+                            <strong>GitHub Repository:</strong>
+                            <ul>
+                                {coinData.links.repos_url.github.map((repo, index) => (
+                                    <li key={index}>
+                                        <a href={repo} target="_blank" rel="noopener noreferrer">
+                                            {repo}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </li>
+                    )}
+                </ul>
+            </div>
         </div>
     );
 };
 
 export default CryptoPage;
 
+
 /*
-Bitcoin Statistics
-Market Cap 
-$1,673,458,879,438 
-Fully Diluted Valuation 
-$1,673,458,879,438
-24 Hour Trading Vol 
-$28,038,949,114
-Circulating Supply 
-19,843,206 
-Total Supply 
-19,843,206
-Max Supply 
-21,000,000
-Info
-Website
-Explorers
-Wallets
-Community
-Search on
-Source Code
-API ID
-Chains
-Categories
+    links
+: 
+announcement_url
+: 
+[]
+bitcointalk_thread_identifier
+: 
+null
+blockchain_site
+: 
+(7) ['https://mempool.space/', 'https://platform.arkhamintelligence.com/explorer/token/bitcoin', 'https://blockchair.com/bitcoin/', 'https://btc.com/', 'https://btc.tokenview.io/', 'https://www.oklink.com/btc', 'https://3xpl.com/bitcoin']
+chat_url
+: 
+[]
+facebook_username
+: 
+"bitcoins"
+homepage
+: 
+['http://www.bitcoin.org']
+official_forum_url
+: 
+['https://bitcointalk.org/']
+repos_url
+: 
+bitbucket
+: 
+[]
+github
+: 
+Array(2)
+0
+: 
+"https://github.com/bitcoin/bitcoin"
+1
+: 
+"https://github.com/bitcoin/bips"
+length
+: 
+2
+[[Prototype]]
+: 
+Array(0)
+[[Prototype]]
+: 
+Object
+snapshot_url
+: 
+null
+subreddit_url
+: 
+"https://www.reddit.com/r/Bitcoin/"
+telegram_channel_identifier
+: 
+""
+twitter_screen_name
+: 
+"bitcoin"
+whitepaper
+: 
+"https://bitcoin.org/bitcoin.pdf"
 */
