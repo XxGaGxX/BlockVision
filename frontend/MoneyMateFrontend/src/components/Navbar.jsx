@@ -54,18 +54,42 @@ function Navbar() {
                                 Contacts
                             </a>
                         </li>
-                        <li className="nav-item last">
+                        
 
                             {isLogged ? (
-                                <a className="nav-link" aria-disabled="true" href=''>
-                                    <BoxArrowRight className='nav-icon' onClick={() => {setIsLogged(false)}}/>
+                            <li className="nav-item dropdown last">
+                                <a
+                                    className="nav-link"
+                                    href="#"
+                                    id="navbarDropdown"
+                                    role="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                >
+                                    <PersonFill className="nav-icon" />
                                 </a>
+                                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <li>
+                                        <a className="dropdown-item" href="#">
+                                            Dashboard
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <hr className="dropdown-divider" />
+                                    </li>
+                                    <li>
+                                        <a className="dropdown-item" href="/login" onClick={() => { setIsLogged(false) }}>
+                                            Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
                             ) : (
-                                    <a className="nav-link" aria-disabled="true" href='/login'>
+                                    <li className='nav-item last'><a className="nav-link" aria-disabled="true" href='/login'>
                                         <PersonFill className='nav-icon' />
-                                    </a>     
+                                    </a> </li>    
                             )}
-                        </li>
+                        
                     </ul>
                 </div>
             </div>

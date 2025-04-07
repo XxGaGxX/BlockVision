@@ -19,6 +19,20 @@
     color: white !important;
 }
 
+.navbar .dropdown-menu {
+    max-width: 200px;
+    /* Imposta una larghezza massima */
+    overflow: hidden;
+    /* Evita che il contenuto esca dai bordi */
+    z-index: 1050;
+    /* Assicurati che il dropdown sia sopra altri elementi */
+}
+
+.navbar .dropdown-item {
+    white-space: nowrap;
+    /* Evita che il testo vada a capo */
+}
+
 .nav-icon {
     margin-top: 5px;
     color: white;

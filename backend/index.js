@@ -154,3 +154,6 @@ router.route('/login').post((req, res) => {
 var port = process.env.PORT || 8090;
 app.listen(port);
 console.log(`Le API sono in ascolto su http://localhost:${port}/api`);
+
+
+//TODO da implementare API nft https://docs.alchemy.com/reference/getnftsforowner-v3
