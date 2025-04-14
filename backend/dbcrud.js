@@ -13,8 +13,8 @@ async function getElencoAccount() {
 
 async function Login(Email) {
   try {
-    // console.log(Email, Password)
     let pool = await sql.connect(config)
+    
     let account = await pool.request()
     .input("Email", sql.NVarChar, Email)  
     .query("SELECT * FROM Account WHERE @Email = Email")
