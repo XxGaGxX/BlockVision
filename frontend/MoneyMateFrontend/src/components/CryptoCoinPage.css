@@ -101,7 +101,19 @@ body {
     background-color: transparent !important;
 }
 
-.timeChart a {
+.marketdata {
+    margin-bottom: 1rem;
+    /* Aggiungi spazio sotto .marketdata */
+}
+
+.actions {
+    text-align: center;
+    /* Centra il contenuto */
+    margin-top: 1rem;
+    /* Aggiungi spazio sopra il pulsante */
+}
+
+.timeChart a, .actions a{
     background-color: #32CD32;
     color: #141414;
     text-decoration: none;

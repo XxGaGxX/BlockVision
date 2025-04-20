@@ -20,8 +20,9 @@ router.use((request, response, next) => {
 });
 
 router.route("/getchart/:id/:days").get((req, res) => {
-  coinId = req.params.id;
-  coinChartDays = req.params.days;
+  const coinId = req.params.id;
+  const coinChartDays = req.params.days;
+  // console.log(req.params)
   const url = `https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=usd&days=${coinChartDays}`;
   const options = {
     method: "GET",
@@ -40,9 +41,10 @@ router.route("/getchart/:id/:days").get((req, res) => {
 });
 
 router.route("/getchart/candle/:id/:days").get((req, res) => {
-  coinId = req.params.id;
-  coinChartDays = req.params.days;
-  const url = `https://api.coingecko.com/api/v3/coins/${coinId}/ohlc?days=${coinChartDays}`;
+  const coinId = req.params.id;
+  const coinChartDays = req.params.days;
+  
+  const url = `https://api.coingecko.com/api/v3/coins/${coinId}/ohlc?vs_currency=usd&days=${coinChartDays}`;
   const options = {
     method: "GET",
     headers: {
@@ -165,6 +167,32 @@ router.route("/login").post((req, res) => {
     res.status(201).json(data);
   });
 });
+
+router.route("/ai").post((req, res) => {
+  const prompt = req.body.text
+
+  fetch("https://openrouter.ai/api/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.OPENROUTER_KEY}`,
+      "HTTP-Referer": "<YOUR_SITE_URL>", // Optional. Site URL for rankings on openrouter.ai.
+      "X-Title": "<YOUR_SITE_NAME>", // Optional. Site title for rankings on openrouter.ai.
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      model: "thudm/glm-z1-32b:free",
+      messages: [
+        {
+          role: "user",
+          content: `${prompt}`,
+        },
+      ],
+    }),
+  })
+    .then((res) => res.json())
+    .then((json) => res.send(json))
+    .catch((err) => console.error(err));
+})
 
 router.route("/nft").get(async (req, res) => {
   try {

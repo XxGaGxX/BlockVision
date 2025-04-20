@@ -24,6 +24,28 @@
     margin-bottom: 1rem;
 }
 
+.trending {
+    padding: 5rem;
+}
+
+.sub {
+    color: grey;
+}
+
+.trendingCat {
+    display: flex;
+    
+}
+
+.titleDiv{
+    display: flex;
+    justify-content: center;
+}
+
+.maxHeigh{
+    height: 100vh;
+}
+
 .BlackDiv {
     background-color: #1B1B1B;
     color: white;
@@ -63,4 +85,33 @@
     width: 100%;
     background-size: auto;
     background-position: center;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 colonne */
+    gap: 2rem;
+    /* Spazio tra le card */
+    padding: 2rem;
+    width: 100%;
+    justify-items: center;
+}
+
+.btn-primary {
+    background-color: #32CD32 !important;
+    border-color: #32CD32 !important; 
+}; 
+
+.greenColor {
+    color: #32CD32 !important;
+}
+
+.flex-horCenter {
+    display: flex;
+    justify-content: center;
+}
+
+.catTitle {
+    margin-top: 2rem;
 }

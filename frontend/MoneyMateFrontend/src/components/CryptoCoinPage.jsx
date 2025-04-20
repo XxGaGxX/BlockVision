@@ -11,6 +11,7 @@ const CryptoPage = () => {
     let [coinData, setCoinData] = useState(null);
     let [coinChartData, setCoinChartData] = useState(null);
     const [timeRange, setTimeRange] = useState(1); // Default to 1 day
+    const [setAiSuggestione, AiSuggestion] = useState('')
     const location = useLocation();
     const cryptoId = location.pathname.split("/")[2];
     const chartRef = useRef(null);
@@ -29,6 +30,46 @@ const CryptoPage = () => {
         } catch (e) {
             console.error(e);
         }
+    }
+
+    async function getAiSuggestione() {
+        event.preventDefault()
+        
+
+
+        const prompt = {
+            text: `Analizza oggettivamente se, in base ai dati disponibili (prezzo attuale, variazioni percentuali, volume di scambio, trend recente e altri indicatori di mercato), può avere senso acquistare la seguente criptovaluta in questo momento.
+
+Non considerare il mio portafoglio, il mio budget o la mia propensione al rischio. Voglio solo una valutazione basata sui dati oggettivi.
+
+La criptovaluta è: ${cryptoId}
+
+Dati a supporto (esempi):
+
+Prezzo attuale: ${coinData.market_data.current_price.usd} $
+
+Variazione 24h: ${coinData.market_data.price_change_percentage_24h}
+
+
+Restituisci un'analisi chiara, oggettiva e sintetica. Se possibile, includi eventuali segnali rialzisti o ribassisti, valutazioni tecniche o pattern di comportamento.`
+
+        }
+
+        
+        const url = `http://localhost:8090/api/ai`
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(prompt)
+            })
+            const data1 = await response.json()
+            console.log(data1)
+
+        } catch (e) { console.error(e) }
+
     }
 
     async function getCoinChartData(coinId, range) {
@@ -202,8 +243,13 @@ const CryptoPage = () => {
                                 </tr>
                             </tbody>
                         </table>
+                        <div className="actions">
+                            <a href="">Grafico OHLC</a>
+                            <a href="" onClick={() => {getAiSuggestione()}}>Consigli Ai</a>
+                        </div>
                     </div>
                 </div>
+
             </div>
 
             {/* Descrizione */}
