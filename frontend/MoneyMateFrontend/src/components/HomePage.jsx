@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./HomePage.css"
 import ScrambleHover from "../animations/scramble"
 import { motion } from "framer-motion"
+import { Display } from 'react-bootstrap-icons';
 
 function HomePage() {
     const [startAnimation, setStartAnimation] = React.useState(false);
@@ -25,63 +26,105 @@ function HomePage() {
             const res = await fetch(url)
             let trending = await res.json()
             
-            await setTrendingCoins(trending.coins)
-            await setTrendingCats(trending.categories)
-            await settrendingNFTs(trending.nfts)
+            await setTrendingCoins(trending.coins.slice(0, -2));
+            await setTrendingCats(trending.categories.slice(0, -2));
+            await settrendingNFTs(trending.nfts.slice(0, -2));
+
+            console.log(trendingNFTs)
             
             
         }catch(e) {console.error(e)}
     }
 
     return (
-        <div className="bigDiv">
-            <div className="HomePageDiv">
-                <ScrambleHover
-                    text={'Block Vision'}
-                    scrambleSpeed={40}
-                    sequential={true}
-                    revealDirection="start"
-                    useOriginalCharsOnly={false}
-                    className="text1"
-                    characters="abcdefghijklmnopqrstuvwxyz!@#$%^&*()_+-=[]{}|;':\,./<>?"
-                    isHovering={startAnimation}
-                />
-                <ScrambleHover
-                    text={'La new vision su Blockchain e Crypto'}
-                    scrambleSpeed={50}
-                    sequential={true}
-                    revealDirection="start"
-                    useOriginalCharsOnly={false}
-                    className="text2"
-                    characters="abcdefghijklmnopqrstuvwxyz!@#$%^&*()_+-=[]{}|;':\,./<>?"
-                    isHovering={startAnimation}
-                />
-            </div>
-            <motion.div className="BlackDiv">
-                <motion.div
-                    initial={{ opacity: 0, y: 75 }}
-                    whileInView={{ opacity: 1, y: 0, transition: { delay: 0.2, duration: 1 } }}
-                    viewport={{ once: true, amount: 1 }}
-                    className="centerText"
-                >
-                    <h1>Entra nella nuova era della finanza con <span style={{ color: "#32CD32", }}>BlockVision</span> <br />Tecnologia all'<span style={{ color: "#32CD32", textDecoration: "underline", textUnderlineOffset: "2" }}>avanguardia</span> per il controllo totale sul tuo futuro crypto.</h1>
-                    <div className="buttonDiv">
+        <div className="homePageWrapper" style={{ overflow: 'hidden' }}>
+            <div className="bigDiv">
+                <div className="HomePageDiv">
+                    <ScrambleHover
+                        text={'Block Vision'}
+                        scrambleSpeed={40}
+                        sequential={true}
+                        revealDirection="start"
+                        useOriginalCharsOnly={false}
+                        className="text1"
+                        characters="abcdefghijklmnopqrstuvwxyz!@#$%^&*()_+-=[]{}|;':\,./<>?"
+                        isHovering={startAnimation}
+                    />
+                    <ScrambleHover
+                        text={'La new vision su Blockchain e Crypto'}
+                        scrambleSpeed={50}
+                        sequential={true}
+                        revealDirection="start"
+                        useOriginalCharsOnly={false}
+                        className="text2"
+                        characters="abcdefghijklmnopqrstuvwxyz!@#$%^&*()_+-=[]{}|;':\,./<>?"
+                        isHovering={startAnimation}
+                    />
+                </div>
+                <motion.div className="BlackDiv">
+                    <motion.div
+                        initial={{ opacity: 0, y: 75 }}
+                        whileInView={{
+                            opacity: 1,
+                            y: 0,
+                            transition: {
+                                delay: 0.2,
+                                duration: 1,
+                                ease: "easeInOut",
+                            },
+                        }}
+                        viewport={{ once: true, amount: 0.5 }}
+                        className="centerText"
+                    >
+                        <h1>
+                            Entra nella nuova era della finanza con{" "}
+                            <span style={{ color: "#32CD32" }}>BlockVision</span> <br />
+                            Tecnologia all'
+                            <span
+                                style={{
+                                    color: "#32CD32",
+                                    textDecoration: "underline",
+                                    textUnderlineOffset: "2",
+                                }}
+                            >
+                                avanguardia
+                            </span>{" "}
+                            per il controllo totale sul tuo futuro crypto.
+                        </h1>
+                    </motion.div>
+                    <motion.div className="buttonDiv">
                         <a href="/crypto">
                             <motion.button
                                 className="btn btn-outline-success btnHome"
                                 initial={{ opacity: 0, y: 100 }}
-                                whileInView={{ opacity: 1, y: 0, transition: { delay: 0.4, duration: 1 } }}
+                                whileInView={{
+                                    opacity: 1,
+                                    y: 0,
+                                    transition: {
+                                        delay: 0.4,
+                                        duration: 1,
+                                        ease: "easeInOut",
+                                    },
+                                }}
                                 viewport={{ once: true, amount: 1 }}
                             >
                                 Crypto
                             </motion.button>
                         </a>
 
-                        <a href="/crypto">
+                        <a href="/nft">
                             <motion.button
                                 className="btn btn-outline-success btnHome"
                                 initial={{ opacity: 0, y: 100 }}
-                                whileInView={{ opacity: 1, y: 0, transition: { delay: 0.6, duration: 1 } }}
+                                whileInView={{
+                                    opacity: 1,
+                                    y: 0,
+                                    transition: {
+                                        delay: 0.6,
+                                        duration: 1,
+                                        ease: "easeInOut",
+                                    },
+                                }}
                                 viewport={{ once: true, amount: 1 }}
                             >
                                 NFT
@@ -92,48 +135,140 @@ function HomePage() {
                             <motion.button
                                 className="btn btn-outline-success btnHome"
                                 initial={{ opacity: 0, y: 100 }}
-                                whileInView={{ opacity: 1, y: 0, transition: { delay: 0.8, duration: 1 } }}
+                                whileInView={{
+                                    opacity: 1,
+                                    y: 0,
+                                    transition: {
+                                        delay: 0.8,
+                                        duration: 1,
+                                        ease: "easeInOut",
+                                    },
+                                }}
                                 viewport={{ once: true, amount: 1 }}
                             >
                                 News
                             </motion.button>
                         </a>
-                    </div>
+                    </motion.div>
                 </motion.div>
-            </motion.div>
-            <motion.div className='trending maxHeigh'>
-                <div className="titleDiv"><h1>Tendenze Cripto: Monete, Categorie e NFT del Momento</h1></div>
-                <div className="trendingDiv">
-                    <div className="catTitle flex-horCenter"><h2>Categorie :</h2></div>
-                    <div className="trendingCat">
-                        
-                        <div className="grid-container">
-                            {trendingCats.map((cat, index) => (
-                                <div className="card" key={index}>
-                                    <div className="card-body">
-                                        <h5 className="card-title">{cat.name}</h5>
-                                        <h6 className="sub">{cat.slug}</h6>
-                                        <p className="card-text">
-                                            <ul>
-                                                <li>Variazione 1h: {cat.market_cap_1h_change}</li>
-                                                <li>Market Cap: {cat.data.market_cap}</li>
-                                                <li>Volume Totale: {cat.data.total_volume}</li>
-                                            </ul>
-                                        </p>
-                                        <a href="#" className="btn btn-primary">
-                                            Scopri di più
-                                        </a>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                <div className="grid-container maxHeigh">
+                    {/* Tabella 1: Categorie */}
+                    <div className="table-section">
+                        <h2>🔥 Categorie in crescita</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Slug</th>
+                                    <th>Variazione 1h</th>
+                                    <th>Market Cap</th>
+                                    <th>Volume Totale</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {trendingCats.map((cat, index) => (
+                                    <motion.tr
+                                        key={index}
+                                        initial={{ opacity: 0, y: 50 }}
+                                        whileInView={{
+                                            opacity: 1,
+                                            y: 0,
+                                            transition: {
+                                                duration: 0.8,
+                                                ease: "easeOut",
+                                            },
+                                        }}
+                                        viewport={{ once: true, amount: 0.5 }}
+                                    >
+                                        <td>{cat.name}</td>
+                                        <td>{cat.slug}</td>
+                                        <td>{cat.market_cap_1h_change} $</td>
+                                        <td>{cat.data.market_cap} $</td>
+                                        <td>{cat.data.total_volume} $</td>
+                                    </motion.tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
-                    <div className="trendingCoins"></div>
-                    <div className="trendingNFT"></div>
+
+                    {/* Tabella 2: Criptovalute */}
+                    <div className="table-section">
+                        <h2>🔥 Criptovalute in crescita</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Prezzo</th>
+                                    <th>Variazione 24h</th>
+                                    <th>Market Cap</th>
+                                    <th>Volume Totale</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {trendingCoins.map((coin, index) => (
+                                    <motion.tr
+                                        key={index}
+                                        initial={{ opacity: 0, y: 50 }}
+                                        whileInView={{
+                                            opacity: 1,
+                                            y: 0,
+                                            transition: {
+                                                duration: 0.8,
+                                                ease: "easeOut",
+                                            },
+                                        }}
+                                        viewport={{ once: true, amount: 0.5 }}
+                                    >
+                                        <td>{coin.name}</td>
+                                        <td>{coin.current_price} $</td>
+                                        <td>{coin.price_change_percentage_24h} %</td>
+                                        <td>{coin.market_cap} $</td>
+                                        <td>{coin.total_volume} $</td>
+                                    </motion.tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    {/* Tabella 3: NFT */}
+                    <div className="table-section">
+                        <h2>🔥 NFT in crescita</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Slug</th>
+                                    <th>Prezzo</th>
+                                    <th>Volume Totale</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {trendingNFTs.map((nft, index) => (
+                                    <motion.tr
+                                        key={index}
+                                        initial={{ opacity: 0, y: 50 }}
+                                        whileInView={{
+                                            opacity: 1,
+                                            y: 0,
+                                            transition: {
+                                                duration: 0.8,
+                                                ease: "easeOut",
+                                            },
+                                        }}
+                                        viewport={{ once: true, amount: 0.5 }}
+                                    >
+                                        <td style={{display : 'flex', justifyContent: "center", alignItems:"center"}}><img src={nft.thumb} alt="" />{nft.name}</td>
+                                        <td>{nft.slug}</td>
+                                        <td>{nft.price} $</td>
+                                        <td>{nft.total_volume} $</td>
+                                    </motion.tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </motion.div>
-        </div>
-    )
+            </div>
+        </div>)
 }
 
 export default HomePage
