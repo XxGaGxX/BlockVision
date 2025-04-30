@@ -15,6 +15,7 @@ import Contacts from './components/contacts.jsx'
 import CryptoPage from './components/CryptoCoinPage.jsx'
 import Nft from './components/nft.jsx'
 import { AuthProvider } from './auth/AuthContext.jsx'
+import NftCollection from './components/NftCollection.jsx'
 // import { AuthContext } from '../auth/AuthContext'
 // import { useContext } from 'react'
 
@@ -35,7 +36,8 @@ function MainApp() {
           <Route path='/crypto' element={<Crypto />}></Route>
           <Route path='/contacts' element={<Contacts />}></Route>
           <Route path='/crypto/:coinName' element={<CryptoPage />}></Route>
-          <Route path='/nft' element={<Nft />}></Route>
+          <Route path='/nft/collections' element={<Nft />}></Route>
+          <Route path='/nft/collections/:nftName' element={<NftCollection />}></Route>
         </Routes>
       </AuthProvider>
     </div>

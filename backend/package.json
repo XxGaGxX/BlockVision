@@ -9,6 +9,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@api/opensea": "file:.api/apis/opensea",
     "@google/generative-ai": "^0.24.0",
     "axios": "^1.8.1",
     "cors": "^2.8.5",

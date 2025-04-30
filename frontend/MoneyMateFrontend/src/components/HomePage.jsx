@@ -26,13 +26,12 @@ function HomePage() {
             const res = await fetch(url)
             let trending = await res.json()
             
-            await setTrendingCoins(trending.coins.slice(0, -2));
-            await setTrendingCats(trending.categories.slice(0, -2));
-            await settrendingNFTs(trending.nfts.slice(0, -2));
+            setTrendingCoins(trending.coins.slice(0, -9));
+            setTrendingCats(trending.categories.slice(0, -2));
+            settrendingNFTs(trending.nfts.slice(0, -1 ));
 
-            console.log(trendingNFTs)
-            
-            
+            console.log(trendingCoins)
+
         }catch(e) {console.error(e)}
     }
 
@@ -219,7 +218,7 @@ function HomePage() {
                                         }}
                                         viewport={{ once: true, amount: 0.5 }}
                                     >
-                                        <td>{coin.name}</td>
+                                        <td><img src={coin.item.small} style={{width : "2.5rem"}} alt="" />{coin.item.name}</td>
                                         <td>{coin.current_price} $</td>
                                         <td>{coin.price_change_percentage_24h} %</td>
                                         <td>{coin.market_cap} $</td>
@@ -257,7 +256,7 @@ function HomePage() {
                                         }}
                                         viewport={{ once: true, amount: 0.5 }}
                                     >
-                                        <td style={{display : 'flex', justifyContent: "center", alignItems:"center"}}><img src={nft.thumb} alt="" />{nft.name}</td>
+                                        <td><img src={nft.thumb} style={{width:"2.5rem"}} alt="" />{nft.name}</td>
                                         <td>{nft.slug}</td>
                                         <td>{nft.price} $</td>
                                         <td>{nft.total_volume} $</td>

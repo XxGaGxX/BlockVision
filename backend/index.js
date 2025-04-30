@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import Db from "./dbcrud.js"; // Aggiungi l'estensione `.js` per i moduli ES
+import opensea from "@api/opensea";
 
 const app = express()
 dotenv.config();
@@ -43,7 +44,7 @@ router.route("/getchart/:id/:days").get((req, res) => {
 router.route("/getchart/candle/:id/:days").get((req, res) => {
   const coinId = req.params.id;
   const coinChartDays = req.params.days;
-  
+
   const url = `https://api.coingecko.com/api/v3/coins/${coinId}/ohlc?vs_currency=usd&days=${coinChartDays}`;
   const options = {
     method: "GET",
@@ -129,7 +130,10 @@ router.route("/coinlistData").get((req, res) => {
 
 router.route("/coindata/:id").get((req, res) => {
   let coinId = req.params.id;
-  const url = `https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`;
+  console.log(coinId)
+  const url = `https://api.coingecko.com/api/v3/coins/${coinId}
+  ?localization=false&tickers=false&market_data=true&community_data=false&
+  developer_data=false&sparkline=false`;
   const options = {
     method: "GET",
     headers: {
@@ -194,26 +198,51 @@ router.route("/ai").post((req, res) => {
     .catch((err) => console.error(err));
 })
 
-router.route("/nft").get(async (req, res) => {
-  try {
-    await Moralis.start({
-      apiKey: process.env.MORALIS_API_KEY,
-    });
 
-    const response = await Moralis.EvmApi.nft.getNFTMetadata({
-      chain: "0x1",
-      format: "decimal",
-      normalizeMetadata: true,
-      mediaItems: false,
-      address: "0xb47e3cd837dDF8e4c57F05d70Ab865de6e193BBB",
-      tokenId: "1",
-    });
+router.route("/collections").get((req, res) => {
+  console.log("f")
+  opensea.auth(process.env.OPENSEA_KEY);
+  opensea
+    .list_collections()
+    .then(({ data }) => res.send(data))
+    .catch((err) => console.error(err));
+})
 
-    console.log(response.raw);
-  } catch (e) {
-    console.error(e);
-  }
-});
+
+router.route("/collections/:next").get((req, res) => {
+  const Next = req.params.next
+  opensea.auth(process.env.OPENSEA_KEY);
+  opensea
+    .list_collections({next : Next})
+    .then(({ data }) => res.send(data))
+    .catch((err) => console.error(err));
+
+})
+
+router.route("/collections/nft/:id").get((req, res) => {
+  console.log("g")
+  const nftCollection = req.params.id
+  opensea.auth(process.env.OPENSEA_KEY)
+  opensea.server("https://api.opensea.io");
+  opensea
+    .get_collection({ collection_slug: nftCollection })
+    .then(({ data }) => res.send(data))
+    .catch((err) => console.error(err));
+})
+
+router.route("/nfts/:collection").get((req, res) => {
+  opensea.auth(process.env.OPENSEA_KEY);
+  opensea.server("https://api.opensea.io");
+  opensea
+    .list_nfts_by_collection({ collection_slug: req.params.collection })
+    .then(({ data }) => res.send(data))
+    .catch((err) => console.error(err));
+})
+
+
+
+
+
 
 var port = process.env.PORT || 8090;
 app.listen(port);

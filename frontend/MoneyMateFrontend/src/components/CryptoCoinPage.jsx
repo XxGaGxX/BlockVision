@@ -20,16 +20,13 @@ const CryptoPage = () => {
         const url = `http://localhost:8090/api/coindata/${cryptoId}`;
         try {
             const res = await fetch(url);
-            if (!res.ok) {
-                console.log(":(");
-                return;
-            }
             const coinDataJson = await res.json();
             setCoinData(coinDataJson);
             console.log(coinDataJson);
         } catch (e) {
             console.error(e);
         }
+        console.log(coinData)
     }
 
     async function getAiSuggestione() {
