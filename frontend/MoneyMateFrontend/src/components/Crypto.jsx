@@ -4,13 +4,13 @@ import { Rss, Search, Star, StarFill } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../auth/AuthContext';
 
-//TODO: bisogna decidere quale scegliere, o cosi o con il trending, forse sarebbe meglio che sia una parte della Home page
+//TODO: we need to decide which to choose, either this or the trending, maybe it would be better as part of the Home page
 
 export default function Crypto() {
-  const { setFavoritesCoins } = useContext(AuthContext)
+  const { setFavoritesCoins } = useContext(AuthContext);
   const [coins, setCoins] = useState([]);
-  const [favorites, setFavorites] = useState([]); 
-  const [searchResult, setSearchResult] = useState([])
+  const [favorites, setFavorites] = useState([]);
+  const [searchResult, setSearchResult] = useState([]);
   const navigate = useNavigate();
 
   async function FetchCoins() {
@@ -26,7 +26,7 @@ export default function Crypto() {
         arrayCoins = [];
       }
       setCoins(arrayCoins);
-      console.log(arrayCoins)
+      console.log(arrayCoins);
     } catch (e) {
       console.error(e);
     }
@@ -35,26 +35,26 @@ export default function Crypto() {
   function toggleFavorite(idCoin) {
     setFavorites((prevFavorites) => {
       const newFavorites = prevFavorites.includes(idCoin)
-        ? prevFavorites.filter((id) => id !== idCoin) 
-        : [...prevFavorites, idCoin]; 
+        ? prevFavorites.filter((id) => id !== idCoin)
+        : [...prevFavorites, idCoin];
 
-      console.log("New Favorites:", newFavorites); 
-      
+      console.log("New Favorites:", newFavorites);
+
     });
 
-    setFavoritesCoins(newFavorites)
+    setFavoritesCoins(newFavorites);
   }
 
-  const  handleInputChange = (event) => {
-    const search = event.target.value.trim()
-    if (search != "" || search == " ") {
-      console.log(search)
+  const handleInputChange = (event) => {
+    const search = event.target.value.trim();
+    if (search !== "" || search === " ") {
+      console.log(search);
       const filteredCoins = coins.filter(item =>
         item.name.toLowerCase().startsWith(search.toLowerCase())
-      )
-      setSearchResult(filteredCoins)
+      );
+      setSearchResult(filteredCoins);
     } else {
-      setSearchResult([])
+      setSearchResult([]);
     }
   };
 
@@ -71,9 +71,9 @@ export default function Crypto() {
   }, [favorites]);
 
   return (
-    <div className="mainDiv1"> 
+    <div className="mainDiv1">
       <div className="title">
-        <h1>Cerca una cripto valuta</h1>
+        <h1>Search for a cryptocurrency</h1>
       </div>
       <div className="searchbar">
         <div className="input-group mb-3">
@@ -97,13 +97,13 @@ export default function Crypto() {
 
       {searchResult.length > 0 ? <div className="searchResult" >
         {searchResult.map((searchCoin, index) => (
-          <p className='searchcoin' onClick={() => {handleRowClick(searchCoin.id)}}><img src={searchCoin.image} alt="" /> {searchCoin.name} {searchCoin.current_price}</p>
+          <p className='searchcoin' onClick={() => { handleRowClick(searchCoin.id) }}><img src={searchCoin.image} alt="" /> {searchCoin.name} {searchCoin.current_price}</p>
         ))}
       </div> : ""}
 
       <div className="cryptoList">
         <div className="text">
-          <h3>Prezzi delle criptovalute per cap. di mercato</h3>
+          <h3>Cryptocurrency prices by market cap</h3>
         </div>
 
         <div className="tableDiv">
@@ -111,13 +111,13 @@ export default function Crypto() {
             <thead>
               <tr className=''>
                 <th scope="col">#</th>
-                <th scope="col">Moneta</th>
-                <th scope="col">Prezzo</th>
+                <th scope="col">Coin</th>
+                <th scope="col">Price</th>
                 <th scope="col">1h</th>
                 <th scope="col">24h</th>
-                <th scope="col">7g</th>
-                <th scope="col">Volume in 24 ore</th>
-                <th scope="col">Cap. di mercato</th>
+                <th scope="col">7d</th>
+                <th scope="col">24h Volume</th>
+                <th scope="col">Market Cap</th>
                 <th scope="col"></th>
               </tr>
             </thead>
@@ -140,7 +140,7 @@ export default function Crypto() {
                       <StarFill
                         onClick={(event) => {
                           event.stopPropagation();
-                          toggleFavorite(coin.id); // Rimuovi dai preferiti
+                          toggleFavorite(coin.id); // Remove from favorites
                         }}
                         style={{ cursor: "pointer", color: "gold" }}
                       />
@@ -148,7 +148,7 @@ export default function Crypto() {
                       <Star
                         onClick={(event) => {
                           event.stopPropagation();
-                          toggleFavorite(coin.id); // Aggiungi ai preferiti
+                          toggleFavorite(coin.id); // Add to favorites
                         }}
                         style={{ cursor: "pointer" }}
                       />

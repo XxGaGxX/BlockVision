@@ -1,0 +1,90 @@
+
+
+.bannerImageDiv {
+    width: 100%;
+    height: 50vh;
+    background-color: #000;
+    /* Fallback nero */
+    background-position: center;
+    /* Centra l'immagine */
+    background-size: cover;
+    /* L'immagine riempie il contenitore mantenendo le proporzioni */
+    background-repeat: no-repeat;
+    /* Evita la ripetizione dell'immagine */
+    display: flex;
+    /* Usa Flexbox per centrare il contenuto */
+    justify-content: center;
+    /* Centra orizzontalmente */
+    align-items: center;
+    /* Centra verticalmente */
+    position: relative;
+    /* Necessario per il posizionamento */
+    overflow: hidden;
+    flex-direction: column;
+    /* Nasconde eventuali contenuti eccedenti */
+}
+
+.bannerImageDiv img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Mantiene le proporzioni e riempie il contenitore */
+    object-position: center;
+    /* Centra l'immagine */
+}
+
+.bannerImageDiv h1 {
+    font-size: 3rem;
+    /* Dimensione del font */
+    font-weight: bold;
+    /* Grassetto */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    /* Ombra per migliorare la leggibilità */
+    color: white;
+    /* Colore del testo */
+    margin: 0;
+    /* Rimuove margini */
+    text-align: center;
+    /* Allinea il testo */
+    z-index: 1;
+    /* Assicura che il testo sia sopra l'immagine */
+}
+
+/* Stile per l'h1 nel banner */
+
+.details_banner {
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    /* Assicura che non utilizzi Flexbox */
+    margin-top: 2rem;
+    /* Aggiunge spazio sopra i bottoni */
+    text-align: center;
+    /* Centra i bottoni orizzontalmente */
+}
+
+.header {
+    padding: 1rem;
+}
+
+.nft-collection {
+    padding: 3rem;
+}
+
+.details_banner button{
+    margin-right: 1rem;
+}
+
+/* Effetto sfumatura scura verso il basso */
+.bannerImageDiv::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, #000 150%);
+    pointer-events: none;
+    z-index: 0;
+    /* Posiziona la sfumatura sotto il testo */
+}

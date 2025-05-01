@@ -57,7 +57,7 @@ export default function Nft() {
           <tbody>
             {nftList.map((col, index) => (
               <tr key={index} className="rownft" onClick={() => handleRowClickNft(col.collection)}>
-                <td>{col.name}</td>
+                <td>{col.collection}</td>
               </tr>
             ))}
           </tbody>

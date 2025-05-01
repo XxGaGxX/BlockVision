@@ -6,9 +6,9 @@ import dotenv from "dotenv";
 import Db from "./dbcrud.js"; // Aggiungi l'estensione `.js` per i moduli ES
 import opensea from "@api/opensea";
 
-const app = express()
+const app = express();
 dotenv.config();
-const router = express.Router()
+const router = express.Router();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -58,7 +58,7 @@ router.route("/getchart/candle/:id/:days").get((req, res) => {
     .then((res) => res.json())
     .then((json) => res.send(json))
     .catch((err) => console.error(err));
-})
+});
 
 router.route("/nft").get((req, res) => {
   const url = "https://api.coingecko.com/api/v3/nfts/list";
@@ -109,8 +109,6 @@ router.route("/coinlist").get((req, res) => {
     .catch((err) => console.error(err));
 });
 
-
-
 router.route("/coinlistData").get((req, res) => {
   const url =
     "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&price_change_percentage=1h%2C24h%2C7d&precision=2";
@@ -130,7 +128,7 @@ router.route("/coinlistData").get((req, res) => {
 
 router.route("/coindata/:id").get((req, res) => {
   let coinId = req.params.id;
-  console.log(coinId)
+  console.log(coinId);
   const url = `https://api.coingecko.com/api/v3/coins/${coinId}
   ?localization=false&tickers=false&market_data=true&community_data=false&
   developer_data=false&sparkline=false`;
@@ -141,10 +139,11 @@ router.route("/coindata/:id").get((req, res) => {
       "x-cg-demo-api-key": `${process.env.COINGECKO_API_KEY}`,
     },
   };
+  console.log(url)
 
   fetch(url, options)
     .then((res) => res.json())
-    .then((json) => res.send(json))
+    .then((json) => console.log(json))
     .catch((err) => console.error(err));
 });
 
@@ -172,63 +171,35 @@ router.route("/login").post((req, res) => {
   });
 });
 
-router.route("/ai").post((req, res) => {
-  const prompt = req.body.text
-
-  fetch("https://openrouter.ai/api/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${process.env.OPENROUTER_KEY}`,
-      "HTTP-Referer": "<YOUR_SITE_URL>", // Optional. Site URL for rankings on openrouter.ai.
-      "X-Title": "<YOUR_SITE_NAME>", // Optional. Site title for rankings on openrouter.ai.
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      model: "thudm/glm-z1-32b:free",
-      messages: [
-        {
-          role: "user",
-          content: `${prompt}`,
-        },
-      ],
-    }),
-  })
-    .then((res) => res.json())
-    .then((json) => res.send(json))
-    .catch((err) => console.error(err));
-})
 
 
 router.route("/collections").get((req, res) => {
-  console.log("f")
   opensea.auth(process.env.OPENSEA_KEY);
   opensea
-    .list_collections()
+    .list_collections({order_by: 'market_cap'})
     .then(({ data }) => res.send(data))
     .catch((err) => console.error(err));
-})
-
+});
 
 router.route("/collections/:next").get((req, res) => {
-  const Next = req.params.next
+  const Next = req.params.next;
   opensea.auth(process.env.OPENSEA_KEY);
   opensea
-    .list_collections({next : Next})
+    .list_collections({ next: Next })
     .then(({ data }) => res.send(data))
     .catch((err) => console.error(err));
+});
 
-})
-
-router.route("/collections/nft/:id").get((req, res) => {
-  console.log("g")
-  const nftCollection = req.params.id
-  opensea.auth(process.env.OPENSEA_KEY)
+router.route("/collections/collection/:id").get((req, res) => {
+  const nftCollection = req.params.id;
+  console.log(req.params)
+  opensea.auth(process.env.OPENSEA_KEY);
   opensea.server("https://api.opensea.io");
   opensea
     .get_collection({ collection_slug: nftCollection })
     .then(({ data }) => res.send(data))
     .catch((err) => console.error(err));
-})
+});
 
 router.route("/nfts/:collection").get((req, res) => {
   opensea.auth(process.env.OPENSEA_KEY);
@@ -237,15 +208,9 @@ router.route("/nfts/:collection").get((req, res) => {
     .list_nfts_by_collection({ collection_slug: req.params.collection })
     .then(({ data }) => res.send(data))
     .catch((err) => console.error(err));
-})
-
-
-
-
-
+});
 
 var port = process.env.PORT || 8090;
 app.listen(port);
 console.log(`Le API sono in ascolto su http://localhost:${port}/api`);
 
-//TODO da implementare API nft https://docs.alchemy.com/reference/getnftsforowner-v3
