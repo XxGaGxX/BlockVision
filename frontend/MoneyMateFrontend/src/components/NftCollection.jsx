@@ -6,8 +6,9 @@ import { useLocation } from 'react-router-dom';
 const NftCollection = () => {
     const location = useLocation()
     const id = location.pathname.split('/')[3] //ERROR : inserire sempre il carattere dello split diego
-    const [nftData, setNftData] = useState(null);
+    const [nftData, setNftData] = useState([]);
     const [error, setError] = useState(null);
+    let urlImage = ""
 
     async function getCollectionData() {
         try {
@@ -17,7 +18,14 @@ const NftCollection = () => {
                 throw new Error(`Server error: ${res.status}`);
             }
             const data = await res.json();
-            console.log(data)
+            if (data.banner_image_url) {
+                data.banner_image_url = data.banner_image_url.replace(
+                    "?",
+                    "?w=3840"
+                );
+            }
+            console.log(data.banner_image_url)
+            
             setNftData(data);
         } catch (e) {
             console.error(e);
@@ -26,7 +34,14 @@ const NftCollection = () => {
     }
 
     useEffect(() => {
+        // console.log(nftData.banner_image_url.substring(127))
+    }, [nftData])
+
+    useEffect(() => {
         getCollectionData();
+        // console.log(nftData.banner_image_url)
+        // urlImage = nftData.banner_image_url
+        // console.log(nftData.banner_image_url.substring(143))
     }, [id]);
 
     if (error) {
@@ -47,7 +62,7 @@ const NftCollection = () => {
                             : nftData.image_url})`,
                     }}
                 >
-                    <h1>{nftData.name}</h1>
+                    <h1><img src={nftData.image_url} style={{width:"50px", marginRight:"20px"}} alt="" />{nftData.name}</h1>
                     <div className="details_banner">
                         <button className='btn btn-outline-light'>{ nftData.created_date }</button>
                         <button className='btn btn-outline-light'>{ nftData.collection }</button>
@@ -61,8 +76,7 @@ const NftCollection = () => {
                 
                 <p>{nftData.description}</p>
                 {/* <img src={nftData.image_url} alt={nftData.collection.name} className="logo" /> */}
-                <p>Supply: {nftData.collection.total_supply}</p>
-                <a href={nftData.collection.opensea_url} target="_blank">OpenSea</a>
+                {/* <a href={nftData.collection.opensea_url} target="_blank">OpenSea</a> */}
             </div>
         </div>
     );

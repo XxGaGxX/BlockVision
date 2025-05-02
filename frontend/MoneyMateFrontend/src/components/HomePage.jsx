@@ -151,44 +151,7 @@ function HomePage() {
                     </motion.div>
                 </motion.div>
                 <div className="grid-container maxHeigh">
-                    {/* Tabella 1: Categorie */}
-                    <div className="table-section">
-                        <h2>🔥 Categorie in crescita</h2>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Slug</th>
-                                    <th>Variazione 1h</th>
-                                    <th>Market Cap</th>
-                                    <th>Volume Totale</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {trendingCats.map((cat, index) => (
-                                    <motion.tr
-                                        key={index}
-                                        initial={{ opacity: 0, y: 50 }}
-                                        whileInView={{
-                                            opacity: 1,
-                                            y: 0,
-                                            transition: {
-                                                duration: 0.8,
-                                                ease: "easeOut",
-                                            },
-                                        }}
-                                        viewport={{ once: true, amount: 0.5 }}
-                                    >
-                                        <td>{cat.name}</td>
-                                        <td>{cat.slug}</td>
-                                        <td>{cat.market_cap_1h_change} $</td>
-                                        <td>{cat.data.market_cap} $</td>
-                                        <td>{cat.data.total_volume} $</td>
-                                    </motion.tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+                    
 
                     {/* Tabella 2: Criptovalute */}
                     <div className="table-section">

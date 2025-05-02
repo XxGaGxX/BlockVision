@@ -129,9 +129,7 @@ router.route("/coinlistData").get((req, res) => {
 router.route("/coindata/:id").get((req, res) => {
   let coinId = req.params.id;
   console.log(coinId);
-  const url = `https://api.coingecko.com/api/v3/coins/${coinId}
-  ?localization=false&tickers=false&market_data=true&community_data=false&
-  developer_data=false&sparkline=false`;
+  const url = `https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`;
   const options = {
     method: "GET",
     headers: {
@@ -143,7 +141,7 @@ router.route("/coindata/:id").get((req, res) => {
 
   fetch(url, options)
     .then((res) => res.json())
-    .then((json) => console.log(json))
+    .then((json) => res.send(json))
     .catch((err) => console.error(err));
 });
 
