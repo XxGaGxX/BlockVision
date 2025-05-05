@@ -8,12 +8,13 @@ const NftCollection = () => {
     const id = location.pathname.split('/')[3] //ERROR : inserire sempre il carattere dello split diego
     const [nftData, setNftData] = useState([]);
     const [error, setError] = useState(null);
+    const [nfts, setNfts] = useState([])
     let urlImage = ""
 
     async function getCollectionData() {
         try {
             console.log(id)
-            const res = await fetch(`http://localhost:8090/api/collections/collection/${id}`);
+            const res = await fetch(`http://localhost:8090/api/collections/${id}`);
             if (!res.ok) {
                 throw new Error(`Server error: ${res.status}`);
             }
@@ -24,7 +25,6 @@ const NftCollection = () => {
                     "?w=3840"
                 );
             }
-            console.log(data.banner_image_url)
             
             setNftData(data);
         } catch (e) {
@@ -33,15 +33,28 @@ const NftCollection = () => {
         }
     }
 
+    async function getCollectionNfts() {
+        try {
+            const response = await fetch(`http://localhost:8090/api/collections/${id}/nfts`)
+            if (!response.ok) { throw new Error("Errore server") }
+            else {
+                const data = await response.json()
+                setNfts(data)
+            }
+        }catch(e) {console.error(e)}
+    }
+
     useEffect(() => {
-        // console.log(nftData.banner_image_url.substring(127))
-    }, [nftData])
+        getCollectionNfts()
+    }, [id])
+
+    useEffect(() => {
+        console.log(nfts)
+    })
 
     useEffect(() => {
         getCollectionData();
-        // console.log(nftData.banner_image_url)
-        // urlImage = nftData.banner_image_url
-        // console.log(nftData.banner_image_url.substring(143))
+
     }, [id]);
 
     if (error) {
@@ -66,17 +79,52 @@ const NftCollection = () => {
                     <div className="details_banner">
                         <button className='btn btn-outline-light'>{ nftData.created_date }</button>
                         <button className='btn btn-outline-light'>{ nftData.collection }</button>
-                        <button className='btn btn-outline-light'>Total Supply : { nftData.total_supply }</button>
+                        <button className='btn btn-outline-light'>Total Supply : {nftData.total_supply}</button>
+                        
                     </div>
+                    
                 </div>
                 
             </div>
             
             <div className="details">
-                
+                {/* TODO aggiungi i dettagli degli NFT */}
                 <p>{nftData.description}</p>
                 {/* <img src={nftData.image_url} alt={nftData.collection.name} className="logo" /> */}
                 {/* <a href={nftData.collection.opensea_url} target="_blank">OpenSea</a> */}
+            </div>
+
+            <div className="nfts container text-center">
+                {nfts.length > 0 ? (
+                    <div className="row">
+                        {nfts.map((nft, index) => (
+                            <div className="col-md-4" key={index}>
+                                <div className="card mb-4 shadow-sm">
+                                    <img
+                                        src={nft.image_url}
+                                        className="card-img-top"
+                                        alt={nft.name}
+                                        style={{ height: "200px", objectFit: "cover" }}
+                                    />
+                                    <div className="card-body">
+                                        <h5 className="card-title">{nft.name}</h5>
+                                        <p className="card-text">{nft.description || "No description available."}</p>
+                                        <a
+                                            href={nft.permalink}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="btn btn-primary"
+                                        >
+                                            View on OpenSea
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <p>No NFTs available.</p>
+                )}
             </div>
         </div>
     );

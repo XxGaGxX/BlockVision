@@ -4,7 +4,6 @@ import { Rss, Search, Star, StarFill } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../auth/AuthContext';
 
-//TODO: we need to decide which to choose, either this or the trending, maybe it would be better as part of the Home page
 
 export default function Crypto() {
   const { setFavoritesCoins } = useContext(AuthContext);

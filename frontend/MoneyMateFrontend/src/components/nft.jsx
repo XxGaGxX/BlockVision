@@ -23,7 +23,7 @@ export default function Nft() {
   }
 
   async function showMore() {
-    const url = `http://localhost:8090/api/collections/${next}`;
+    const url = `http://localhost:8090/api/collections/next/${next}`;
     try {
       const res = await fetch(url);
       const nftArray = await res.json();
