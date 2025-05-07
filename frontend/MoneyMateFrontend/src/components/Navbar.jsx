@@ -1,16 +1,19 @@
-import './Navbar.css'
-import { Person, PersonFill, BoxArrowRight } from 'react-bootstrap-icons'
-import { AuthContext } from '../auth/AuthContext'
-import { useContext } from 'react'
-
+import './Navbar.css';
+import { Person, PersonFill } from 'react-bootstrap-icons';
+import { AuthContext } from '../auth/AuthContext';
+import { useContext } from 'react';
+import { useLocation } from 'react-router';
 
 function Navbar() {
+    const location = useLocation();
+    const { isLogged } = useContext(AuthContext);
+    const { setIsLogged } = useContext(AuthContext);
 
-    const { isLogged } = useContext(AuthContext)
-    const {setIsLogged} = useContext(AuthContext)
+    // Controlla se l'URL contiene '/nft/collections'
+    const isTransparent = location.pathname.includes('/nft/collections');
 
     return (
-        <nav className="navbar navbar-expand-lg">
+        <nav className={`navbar ${isTransparent ? "navbar-transparent" : "navbar-default"} navbar-expand-lg`}>
             <div className="container-fluid">
                 <a className="navbar-brand" href="/">
                     <img
@@ -54,9 +57,8 @@ function Navbar() {
                                 Contacts
                             </a>
                         </li>
-                        
 
-                            {isLogged ? (
+                        {isLogged ? (
                             <li className="nav-item dropdown last">
                                 <a
                                     className="nav-link"
@@ -84,19 +86,18 @@ function Navbar() {
                                     </li>
                                 </ul>
                             </li>
-                            ) : (
-                                    <li className='nav-item last'><a className="nav-link" aria-disabled="true" href='/login'>
-                                        <PersonFill className='nav-icon' />
-                                    </a> </li>    
-                            )}
-                        
+                        ) : (
+                            <li className='nav-item last'>
+                                <a className="nav-link" aria-disabled="true" href='/login'>
+                                    <PersonFill className='nav-icon' />
+                                </a>
+                            </li>
+                        )}
                     </ul>
                 </div>
             </div>
         </nav>
-
-
-    )
+    );
 }
 
-export default Navbar
+export default Navbar;

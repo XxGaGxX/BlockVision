@@ -1,90 +1,163 @@
-
-
-.bannerImageDiv {
-    width: 100%;
-    height: 50vh;
-    background-color: #000;
-    /* Fallback nero */
-    background-position: center;
-    /* Centra l'immagine */
-    background-size: cover;
-    /* L'immagine riempie il contenitore mantenendo le proporzioni */
-    background-repeat: no-repeat;
-    /* Evita la ripetizione dell'immagine */
-    display: flex;
-    /* Usa Flexbox per centrare il contenuto */
-    justify-content: center;
-    /* Centra orizzontalmente */
-    align-items: center;
-    /* Centra verticalmente */
-    position: relative;
-    /* Necessario per il posizionamento */
-    overflow: hidden;
-    flex-direction: column;
-    /* Nasconde eventuali contenuti eccedenti */
-}
-
-.bannerImageDiv img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* Mantiene le proporzioni e riempie il contenitore */
-    object-position: center;
-    /* Centra l'immagine */
-}
-
-.bannerImageDiv h1 {
-    font-size: 3rem;
-    /* Dimensione del font */
-    font-weight: bold;
-    /* Grassetto */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    /* Ombra per migliorare la leggibilità */
-    color: white;
-    /* Colore del testo */
-    margin: 0;
-    /* Rimuove margini */
-    text-align: center;
-    /* Allinea il testo */
-    z-index: 1;
-    /* Assicura che il testo sia sopra l'immagine */
-}
-
-/* Stile per l'h1 nel banner */
-
-.details_banner {
-    z-index: 2;
-    display: flex;
-    justify-content: center;
-    /* Assicura che non utilizzi Flexbox */
-    margin-top: 2rem;
-    /* Aggiunge spazio sopra i bottoni */
-    text-align: center;
-    /* Centra i bottoni orizzontalmente */
-}
-
-.header {
-    padding: 1rem;
+/* Modern Dark Theme for NFT Collection */
+:root {
+    --dark-bg: #111;
+    --darker-bg: #080808;
+    --light-text: #eee;
+    --muted-text: #888;
+    --highlight: #1db954;
+    --border-radius: 20px;
+    --card-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+    --transition: 0.3s ease-in-out;
 }
 
 .nft-collection {
-    padding: 3rem;
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.details_banner button{
-    margin-right: 1rem;
+.banner {
+    position: relative;
+    height: 70vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
 }
 
-/* Effetto sfumatura scura verso il basso */
-.bannerImageDiv::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
+.banner-overlay {
+    position: relative;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    backdrop-filter: blur(5px);
+}
+
+.banner-logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--highlight);
+    margin-bottom: 1rem;
+}
+
+.banner h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    color: var(--light-text);
+}
+
+.banner-details {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: var(--muted-text);
+}
+
+.collection-details {
+    max-width: 1000px;
+    margin: 3rem auto 2rem;
+    padding: 1rem;
+    background-color: var(--darker-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    color: var(--light-text);
+}
+
+.nft-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nft-card {
+    background: var(--darker-bg);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.nft-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+}
+
+.nft-img {
     width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2) 0%, #000 150%);
-    pointer-events: none;
-    z-index: 0;
-    /* Posiziona la sfumatura sotto il testo */
+    height: 250px;
+    object-fit: cover;
+    background-color: #000;
+}
+
+.nft-info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.nft-info h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--light-text);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.nft-info p {
+    font-size: 0.9rem;
+    color: var(--muted-text);
+    line-height: 1.4;
+    max-height: 4.2em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.nft-info a {
+    color: var(--highlight);
+    font-weight: 500;
+    text-decoration: none;
+    margin-top: auto;
+    transition: color var(--transition);
+}
+
+.nft-info a:hover {
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .banner h1 {
+        font-size: 2rem;
+    }
+
+    .banner-logo {
+        width: 80px;
+        height: 80px;
+    }
+
+    .banner-details {
+        font-size: 0.8rem;
+    }
+
+    .nft-grid {
+        grid-template-columns: 1fr;
+    }
 }

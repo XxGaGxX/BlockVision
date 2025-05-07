@@ -28,6 +28,9 @@
     /* Assicurati che il dropdown sia sopra altri elementi */
 }
 
+
+
+
 .navbar .dropdown-item {
     white-space: nowrap;
     /* Evita che il testo vada a capo */
