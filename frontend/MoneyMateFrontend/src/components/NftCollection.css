@@ -157,7 +157,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1000;
-    width: 98%;
+    width: 90%;
     height: 92vh;
     background-color: #1c1c1c;
     border-radius: 24px;
@@ -193,17 +193,28 @@ body {
 }
 
 .firstCol {
-    background-color: #121212;
-    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    /* border-right: 1px solid rgba(255, 255, 255, 0.05); */
     align-items: center;
     padding-right: 1rem;
 }
 
 .firstCol img {
-    max-width: 100%;
-    max-height: 90%;
+    width: 80%;
+    /* L'immagine occupa l'80% della larghezza del contenitore */
+    height: 80%;
+    /* L'immagine occupa l'80% dell'altezza del contenitore */
+    max-width: 600px;
+    /* Limita la larghezza massima */
+    max-height: 600px;
+    /* Limita l'altezza massima */
+    object-fit: cover;
+    /* Ritaglia l'immagine per riempire il contenitore */
     border-radius: 10px;
+    /* Bordi arrotondati */
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.7);
+    /* Aggiunge un'ombra */
+    margin: auto;
+    /* Centra l'immagine verticalmente e orizzontalmente */
 }
 
 /* Pulsante Chiudi */

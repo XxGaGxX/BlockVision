@@ -50,19 +50,19 @@ const NftCollection = () => {
       nftData.innerHTML = `
   <button class='nft-close' onclick="document.querySelector('.nft-item').remove()">×</button>
   <div class='container'>
-    <div class='row'>
+    <div class='row gx-5'>
       <div class='col-6 firstCol'>
-        <img src='${item.display_image_url}' alt='nft'/>
+        <img src='${data.nft.display_image_url}' alt='nft'/>
       </div>
       <div class='col-6'>
-        <h2>${item.name}</h2>
-        <p>${item.description || 'No description available.'}</p>
-        <a href='${item.permalink}' target='_blank'>View on OpenSea</a>
+        <h2>${data.nft.name}</h2>
+        <p>${data.nft.description || 'No description available.'}</p>
+        <a href='${data.nft.permalink}' target='_blank'>View on OpenSea</a>
       </div>
     </div>
   </div>
 `;
-      
+
       itemnft.appendChild(nftData);
 
       div.insertBefore(itemnft, banner);
@@ -127,11 +127,11 @@ const NftCollection = () => {
           nfts.map((nft, idx) => (
             nft.image_url == null ? null : (
               <div className="nft-card" key={idx} onClick={() => handleRowClickNft(nft.identifier, nft.contract)} >
-                <img src={nft.image_url} alt={nft.name} className="nft-img" />
+                <img src={nft.display_image_url || nft.image_url} alt={nft.name} className="nft-img" />
                 <div className="nft-info">
                   <h2>{nft.name}</h2>
                   <p>{nft.description || 'No description available.'}</p>
-                  <a href={nft.permalink} target="_blank" rel="noopener noreferrer">
+                  <a href={nft.permalink} target="" rel="noopener noreferrer">
                     View on OpenSea
                   </a>
                 </div>
