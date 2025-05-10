@@ -1,5 +1,12 @@
 {
+  "name": "blockvision",
+  "version": "1.0.0",
+  "description": "A simple web application for managing and tracking blocked users.",
   "dependencies": {
     "bcrypt": "^5.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/XxGaGxX/BlockVision.git"
   }
 }
