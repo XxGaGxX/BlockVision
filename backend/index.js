@@ -211,6 +211,28 @@ router.route('/collections/:id/nfts').get((req, res) => {
       .catch((err) => console.error(err));
 })
 
+router.route('/collections/:id/nfts/:next').get((req, res) => {
+    opensea.auth(process.env.OPENSEA_KEY);
+    opensea.server("https://api.opensea.io");
+    opensea
+      .list_nfts_by_collection({ collection_slug: req.params.id , next : req.params.next})
+      .then(({ data }) => res.send(data))
+      .catch((err) => console.error(err));
+})
+
+router.route('/item/:chain/:address/:id').get((req, res) => {
+  opensea.auth(process.env.OPENSEA_KEY);
+  opensea.server("https://api.opensea.io");
+  opensea
+    .get_nft({
+      chain: req.params.chain,
+      address: req.params.address,
+      identifier: req.params.id,
+    })
+    .then(({ data }) => res.send(data))
+    .catch((err) => console.error(err));
+});
+
 router.route("/collections/:id/nfts/:next").get((req, res) => {
   opensea.auth(process.env.OPENSEA_KEY);
   opensea.server("https://api.opensea.io");
