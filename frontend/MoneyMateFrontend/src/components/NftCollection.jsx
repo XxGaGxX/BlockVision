@@ -47,19 +47,19 @@ const NftCollection = () => {
       const nftData = document.createElement('div');
       itemDiv.className = 'item-div';
       itemnft.className = 'nft-item';
-      nftData.innerHTML = `
+      itemnft.innerHTML = `
   <button class='nft-close' onclick="document.querySelector('.nft-item').remove()">×</button>
-  <div class='container'>
-    <div class='row gx-5'>
+  
+    <div class='row'>
       <div class='col-6 firstCol'>
-        <img src='${data.nft.display_image_url}' alt='nft'/>
+        <img src='${data.nft.display_image_url}' class='nftSingleImg' alt='nft'/>
       </div>
-      <div class='col-6'>
+      <div class='col-6 secondCol'>
         <h2>${data.nft.name}</h2>
         <p>${data.nft.description || 'No description available.'}</p>
         <a href='${data.nft.permalink}' target='_blank'>View on OpenSea</a>
       </div>
-    </div>
+
   </div>
 `;
 
