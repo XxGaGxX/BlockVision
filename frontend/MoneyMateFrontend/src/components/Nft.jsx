@@ -36,14 +36,28 @@ function nft() {
                         <div className="col" style={{ marginLeft: "2rem" }}>
                             <div className="card" style={{ width: "100%", height: "100%", backgroundColor:"#141414", boxShadow: "0 0 0", color: "white", padding:"0"}}>
                                 <div className="card-body">
-                                    <h2 className="card-title">{nftData.name}</h2>
-                                    <h6 className="card-text" style={{ marginTop: "1rem", display: "flex" }}>{nftData.collection} <p style={{ marginLeft: "0.5rem", display: "flex", color: "gray" }}>| Owned by</p> </h6>
-                                    <p>
-                                        <button>{ nftData.collection }</button>
-                                        <button>{ nftData.collection }</button>
-                                        <button>{ nftData.collection }</button>
-                                        
+                                    <h2 className="card-title">{nftData.name ? nftData.name : `${nftData.collection} #${nftData.identifier}`}</h2>
+                                    <h6 className="card-text" style={{ marginTop: "1rem", display: "flex" }}>{nftData.collection} <p style={{ marginLeft: "0.5rem", display: "flex", color: "gray" }}>| Owned by</p> </h6> {/* TODO: get dell'owner */}
+                                    <p style={{width:"100"}}>
+                                        <button className='btn btn-dark-outline text-light'>{ nftData.collection }</button>
+                                        <button className='btn btn-dark-outline text-light' >{ nftData.collection }</button>
+                                        <button className='btn btn-dark-outline text-light'>{ `TOKEN #${nftData.identifier}` }</button>
                                     </p>
+                                    <div className="finance"> {/* TODO: fare un get dei dati finanaziari, prendendo offerte */}
+                                        <div className="container-fluid">
+                                            <div className="row">
+                                                <div className="col d-flex flex-column"></div>
+                                                <div className="col d-flex flex-column"></div>
+                                                <div className="col d-flex flex-column"></div>
+                                                <div className="col d-flex flex-column"></div>
+                                            </div>
+                                            <hr />
+                                            <div className="row">
+                                                <div className="col"></div>
+                                            </div>
+                                            <hr />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

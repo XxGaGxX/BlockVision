@@ -6,10 +6,11 @@ import { Rss, Search, Star, StarFill } from 'react-bootstrap-icons';
 export default function Nft() {
   const [nftList, setNftList] = useState([]);
   const [next, setNext] = useState("");
+  const [searchResult, setSearchResult] = useState([])
   const navigate = useNavigate();
 
   async function getNft() {
-    const url = "http://localhost:8090/api/collections"; // corretto
+    const url = "http://localhost:8090/api/collections"; 
     try {
       const res = await fetch(url);
       const nftArray = await res.json();
@@ -39,6 +40,18 @@ export default function Nft() {
     }
   }
 
+  const handleInputChange = (event) => {
+    const search = event.target.value.trim();
+    if (search !== "" || search === " ") {
+      const filteredNfts = nftList.filter(item =>
+        item.collection.toLowerCase().startsWith(search.toLowerCase())
+      );
+      setSearchResult(filteredNfts);
+    } else {
+      setSearchResult([]);
+    }
+  };
+
   const handleRowClickNft = (collectionId) => {
     navigate(`/nft/collections/${collectionId}`);
   };
@@ -47,10 +60,19 @@ export default function Nft() {
     getNft();
   }, []);
 
+  useEffect(()=>{
+    console.log(searchResult)
+  }, [searchResult])
+
   return (
     <div className="mainDivNftPage">
       <div className="titleDivNftPage cenHor">
         <h1>NFT Collections</h1>
+      </div>
+      <div className="searchDiv w-100% d-flex justify-content-center align-items-center flex-column">
+        <div class="input-group mb-3 mt-4" >
+          <input type="text" class="form-control" placeholder="cryptopunks, boredapeyachtclub ecc..." onChange={handleInputChange} aria-label="Recipient's username" aria-describedby="basic-addon2" />
+        </div>
       </div>
       <div className="nftCollectionsDiv">
         <table>

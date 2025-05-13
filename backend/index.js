@@ -1,9 +1,9 @@
-import Moralis from "moralis";
+
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
-import Db from "./dbcrud.js"; // Aggiungi l'estensione `.js` per i moduli ES
+// import Db from "./dbcrud.js"; // Aggiungi l'estensione `.js` per i moduli ES
 import opensea from "@api/opensea";
 
 const app = express();
