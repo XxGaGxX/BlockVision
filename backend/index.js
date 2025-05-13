@@ -1,4 +1,3 @@
-
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
@@ -137,7 +136,7 @@ router.route("/coindata/:id").get((req, res) => {
       "x-cg-demo-api-key": `${process.env.COINGECKO_API_KEY}`,
     },
   };
-  console.log(url)
+  console.log(url);
 
   fetch(url, options)
     .then((res) => res.json())
@@ -169,18 +168,16 @@ router.route("/login").post((req, res) => {
   });
 });
 
-
-
 router.route("/collections").get((req, res) => {
   opensea.auth(process.env.OPENSEA_KEY);
   opensea
-    .list_collections({order_by: 'market_cap'})
+    .list_collections({ order_by: "market_cap" })
     .then(({ data }) => res.send(data))
     .catch((err) => console.error(err));
 });
 
 router.route("/collections/next/:next").get((req, res) => {
-  console.log("next")
+  console.log("next");
   const Next = req.params.next;
   opensea.auth(process.env.OPENSEA_KEY);
   opensea
@@ -192,7 +189,7 @@ router.route("/collections/next/:next").get((req, res) => {
 router.route("/collections/:id").get((req, res) => {
   const nftCollection = req.params.id;
   console.log("id");
-  console.log(req.params)
+  console.log(req.params);
   opensea.auth(process.env.OPENSEA_KEY);
   opensea.server("https://api.opensea.io");
   opensea
@@ -201,26 +198,28 @@ router.route("/collections/:id").get((req, res) => {
     .catch((err) => console.error(err));
 });
 
+router.route("/collections/:id/nfts").get((req, res) => {
+  opensea.auth(process.env.OPENSEA_KEY);
+  opensea.server("https://api.opensea.io");
+  opensea
+    .list_nfts_by_collection({ collection_slug: req.params.id })
+    .then(({ data }) => res.send(data))
+    .catch((err) => console.error(err));
+});
 
-router.route('/collections/:id/nfts').get((req, res) => {
-    opensea.auth(process.env.OPENSEA_KEY);
-    opensea.server("https://api.opensea.io");
-    opensea
-      .list_nfts_by_collection({ collection_slug: req.params.id })
-      .then(({ data }) => res.send(data))
-      .catch((err) => console.error(err));
-})
+router.route("/collections/:id/nfts/:next").get((req, res) => {
+  opensea.auth(process.env.OPENSEA_KEY);
+  opensea.server("https://api.opensea.io");
+  opensea
+    .list_nfts_by_collection({
+      collection_slug: req.params.id,
+      next: req.params.next,
+    })
+    .then(({ data }) => res.send(data))
+    .catch((err) => console.error(err));
+});
 
-router.route('/collections/:id/nfts/:next').get((req, res) => {
-    opensea.auth(process.env.OPENSEA_KEY);
-    opensea.server("https://api.opensea.io");
-    opensea
-      .list_nfts_by_collection({ collection_slug: req.params.id , next : req.params.next})
-      .then(({ data }) => res.send(data))
-      .catch((err) => console.error(err));
-})
-
-router.route('/item/:chain/:address/:id').get((req, res) => {
+router.route("/item/:chain/:address/:id").get((req, res) => {
   opensea.auth(process.env.OPENSEA_KEY);
   opensea.server("https://api.opensea.io");
   opensea
@@ -237,7 +236,35 @@ router.route("/collections/:id/nfts/:next").get((req, res) => {
   opensea.auth(process.env.OPENSEA_KEY);
   opensea.server("https://api.opensea.io");
   opensea
-    .list_nfts_by_collection({ collection_slug: req.params.id , next : req.params.next})
+    .list_nfts_by_collection({
+      collection_slug: req.params.id,
+      next: req.params.next,
+    })
+    .then(({ data }) => res.send(data))
+    .catch((err) => console.error(err));
+});
+
+router.route("/collection/:collection/identifier/:identifier/listing").get((req, res) => {
+  opensea.auth(process.env.OPENSEA_KEY);
+  opensea.server("https://api.opensea.io");
+  opensea
+    .get_best_listing_on_nft_v2({
+      collection_slug: req.params.collection,
+      identifier: req.params.identifier,
+    })
+    .then(({ data }) => res.send(data))
+    .catch((err) => console.error(err));
+});
+
+router.route('bestOffer/collection/:collection/identifier/:id').get((req, res) => {
+  
+  opensea.auth(process.env.OPENSEA_KEY);
+  opensea.server("https://api.opensea.io");
+  opensea
+    .get_best_offer_on_nft_v2({
+      collection_slug: req.params.collection,
+      identifier: req.params.id,
+    })
     .then(({ data }) => res.send(data))
     .catch((err) => console.error(err));
 });
@@ -245,4 +272,3 @@ router.route("/collections/:id/nfts/:next").get((req, res) => {
 var port = process.env.PORT || 8090;
 app.listen(port);
 console.log(`Le API sono in ascolto su http://localhost:${port}/api`);
-

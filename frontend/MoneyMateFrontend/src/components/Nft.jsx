@@ -6,7 +6,8 @@ function nft() {
     const location = useLocation();
     const contract = location.pathname.split('/')[2];
     const id = location.pathname.split('/')[3];
-    const [nftData, setNftData] = useState(null);
+    const [nftData, setNftData] = useState([]);
+    const [nftFinanceData, setNftFinanceData] = useState([]);
 
     useEffect(() => {
         try {
@@ -24,6 +25,19 @@ function nft() {
         }
     }, [id, contract])
 
+    useEffect(() => { 
+        const getNftFinanceData = async () => {
+            try {
+                const res = await fetch(`http://localhost:8090/api/collection/${nftData.collection}/identifier/${id}/listing
+                    `);
+                if (!res.ok) throw new Error("Server error");
+                const data = await res.json();
+                console.log(data.price.current);
+                setNftFinanceData(data);
+            } catch (e) { console.error(e) }
+        }
+        getNftFinanceData();
+    }, [nftData]);
 
     return (
         <div style={{display: "flex", justifyContent: "center", alignItems: "center", height: "calc(100vh - 76px)"}}>
@@ -53,7 +67,10 @@ function nft() {
                                             </div>
                                             <hr />
                                             <div className="row">
-                                                <div className="col"></div>
+                                                <div className="col">
+                                                    <p className='fs-7 text-white-50'>BUY FOR</p>
+                                                    <div>{nftFinanceData.price ? <p className='fs-2'>{ nftFinanceData.price.current.decimals} {nftFinanceData.price.current.currency} </p> : <p className='fs-2'>-</p>}</div>
+                                                </div>
                                             </div>
                                             <hr />
                                         </div>
