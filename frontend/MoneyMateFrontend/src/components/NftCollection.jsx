@@ -20,7 +20,7 @@ const NftCollection = () => {
         if (data.banner_image_url) {
           data.banner_image_url = data.banner_image_url.replace("?", "?w=3840");
         }
-        // console.log(data)
+        console.log(data)
         setNftData(data);
       } catch (e) {
         setError(e.message);
@@ -36,38 +36,41 @@ const NftCollection = () => {
     const banner = document.querySelector('.banner')
 
     try {
-      const res = await fetch(`http://localhost:8090/api/item/ethereum/${nftContract}/${nftId}`);
-      if (!res.ok) throw new Error("Server error");
-      const data = await res.json();
-      data.nft.display_image_url = data.nft.display_image_url.replace("?w=500", "?w=3840");
-      console.log(data.nft);
-      const item = data.nft;
-      const itemDiv = document.createElement('div');
-      const itemnft = document.createElement('div');
-      const nftData = document.createElement('div');
-      itemDiv.className = 'item-div';
-      itemnft.className = 'nft-item';
-      itemnft.innerHTML = `
-  <button class='nft-close' onclick="document.querySelector('.nft-item').remove()">×</button>
+      navigate(`/nft/${nftContract}/${nftId}`);
+
+//       const res = await fetch(`http://localhost:8090/api/item/ethereum/${nftContract}/${nftId}`);
+//       if (!res.ok) throw new Error("Server error");
+//       const data = await res.json();
+//       data.nft.display_image_url = data.nft.display_image_url.replace("?w=500", "?w=3840");
+//       console.log(data.nft);
+//       const item = data.nft;
+//       const itemDiv = document.createElement('div');
+//       const itemnft = document.createElement('div');
+//       const nftData = document.createElement('div');
+//       itemDiv.className = 'item-div';
+//       itemnft.className = 'nft-item';
+//       itemnft.innerHTML = `
+//   <button class='nft-close' onclick="document.querySelector('.nft-item').remove()">×</button>
   
-    <div class='row'>
-      <div class='col-6 firstCol'>
-        <img src='${data.nft.display_image_url}' class='nftSingleImg' alt='nft'/>
-      </div>
-      <div class='col-6 secondCol'>
-        <h2>${data.nft.name}</h2>
-        <p>${data.nft.description || 'No description available.'}</p>
-        <a href='${data.nft.permalink}' target='_blank'>View on OpenSea</a>
-      </div>
+//     <div class='row'>
+//       <div class='col-6 firstCol'>
+//         <img src='${data.nft.display_image_url}' class='nftSingleImg' alt='nft'/>
+//       </div>
+//       <div class='col-6 secondCol'>
+//         <h2>${data.nft.name}</h2>
+//         <p>${data.nft.collection} | Owner : ${data.nft.contract}</p>
+//       </div>
 
-  </div>
-`;
+//   </div>
+// `;
 
-      itemnft.appendChild(nftData);
+//       itemnft.appendChild(nftData);
 
-      div.insertBefore(itemnft, banner);
-      // div.insertBefore(document.createElement('div')).innerHTML = `<div class='item-div'><div class='nft-item'></div></div>`, banner)
+//       div.insertBefore(itemnft, banner);
+//       // div.insertBefore(document.createElement('div')).innerHTML = `<div class='item-div'><div class='nft-item'></div></div>`, banner)
 
+      
+      
     } catch (error) {
       console.error("Error fetching NFT data:", error);
 

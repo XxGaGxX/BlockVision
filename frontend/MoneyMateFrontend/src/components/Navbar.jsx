@@ -13,7 +13,7 @@ function Navbar() {
     const isTransparent = location.pathname.includes('/nft/collections');
 
     return (
-        <nav className={`navbar ${isTransparent ? "navbar-transparent" : "navbar-default"} navbar-expand-lg`}>
+        <nav style={{height:"76px"}} className={`navbar ${isTransparent ? "navbar-transparent" : "navbar-default"} navbar-expand-lg`}>
             <div className="container-fluid">
                 <a className="navbar-brand" href="/">
                     <img

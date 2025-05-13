@@ -41,6 +41,12 @@ body {
     border-radius: var(--border-radius);
     box-shadow: var(--card-shadow);
     backdrop-filter: blur(5px);
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 30rem;
 }
 
 .banner-logo {
@@ -145,7 +151,7 @@ body {
     color: #fff;
 }
 
-.nft-item {
+/* .nft-item {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -161,7 +167,7 @@ body {
     align-items: center;
     justify-content: center;
     padding: 7rem;
-}
+} */
 
 .nft-item .container {
     width: 100%;
@@ -184,7 +190,7 @@ body {
 
 .firstCol {
     align-items: center;
-    background-color: firebrick;
+    /* background-color: firebrick; */
     width: 40rem;
 }
 
@@ -197,13 +203,13 @@ body {
 }
 
 .row {
-    background-color: #1db954;
+    /* background-color: #1db954; */
     width: 100%;
 }
 
 .nftSingleImg {
     width: 40rem;
-    max-height: 41.5rem;
+    max-height: 40rem;
     object-fit: cover;
     border-radius: var(--border-radius);
 }

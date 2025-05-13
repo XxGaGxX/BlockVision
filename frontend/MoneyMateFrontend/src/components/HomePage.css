@@ -179,3 +179,78 @@
         transition: background-color 0.3s ease;
     }
 }
+
+@media screen and (max-width: 1024px) {
+    .text1 {
+        font-size: 4rem;
+    }
+
+    .text2 {
+        font-size: 2rem;
+    }
+
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .table-section table {
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .text1 {
+        font-size: 3rem;
+        text-align: center;
+    }
+
+    .text2 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .buttonDiv {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btnHome {
+        width: 80%;
+        margin: 0.5rem 0;
+    }
+
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    .table-section {
+        padding: 1rem;
+    }
+
+    .table-section table {
+        font-size: 0.8rem;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: auto;
+        display: block;
+    }
+
+    .HomePageDiv {
+        padding: 1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .text1 {
+        font-size: 2rem;
+    }
+
+    .text2 {
+        font-size: 1.2rem;
+    }
+
+    .btnHome {
+        font-size: 1rem;
+        padding: 0.6rem 1.2rem;
+    }
+}

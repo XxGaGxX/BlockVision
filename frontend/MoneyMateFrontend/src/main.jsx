@@ -15,6 +15,7 @@ import Contacts from './components/contacts.jsx'
 import CryptoPage from './components/CryptoCoinPage.jsx'
 import NftList from './components/nftList.jsx'
 import { AuthProvider } from './auth/AuthContext.jsx'
+import Nft from './components/nft.jsx'
 import NftCollection from './components/NftCollection.jsx'
 
 // import { AuthContext } from '../auth/AuthContext'
@@ -39,6 +40,7 @@ function MainApp() {
           <Route path='/crypto/:coinName' element={<CryptoPage />}></Route>
           <Route path='/nft/collections' element={<NftList />}></Route>
           <Route path='/nft/collections/:nftName' element={<NftCollection />}></Route>
+          <Route path='/nft/:contract/:id' element={<Nft />}></Route>
 
         </Routes>
       </AuthProvider>
