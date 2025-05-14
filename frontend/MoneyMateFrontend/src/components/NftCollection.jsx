@@ -10,6 +10,7 @@ const NftCollection = () => {
   const [nfts, setNfts] = useState([]);
   const [nextNfts, setNextNfts] = useState('');
   const navigate = useNavigate()
+  const [collectionStats  , setCollectionStats] = useState(null);
 
   useEffect(() => {
     const getCollectionData = async () => {
@@ -30,51 +31,26 @@ const NftCollection = () => {
     getCollectionData();
   }, [id]);
 
+  useEffect(() => { 
+    const getCollectionStats = async () => {
+      try {
+        const res = await fetch(`http://localhost:8090/api/collections/${id}/stats`);
+        if (!res.ok) throw new Error(`Server error: ${res.status}`);
+        const data = await res.json();
+        console.log(data)
+        setCollectionStats(data);
+      } catch (e) {
+        setError(e.message);
+      }
+    };
+
+    getCollectionStats();
+  },[id])
 
   const handleRowClickNft = async (nftId, nftContract) => {
     const div = document.querySelector('.nft-collection')
     const banner = document.querySelector('.banner')
-
-    try {
-      navigate(`/nft/${nftContract}/${nftId}`);
-
-//       const res = await fetch(`http://localhost:8090/api/item/ethereum/${nftContract}/${nftId}`);
-//       if (!res.ok) throw new Error("Server error");
-//       const data = await res.json();
-//       data.nft.display_image_url = data.nft.display_image_url.replace("?w=500", "?w=3840");
-//       console.log(data.nft);
-//       const item = data.nft;
-//       const itemDiv = document.createElement('div');
-//       const itemnft = document.createElement('div');
-//       const nftData = document.createElement('div');
-//       itemDiv.className = 'item-div';
-//       itemnft.className = 'nft-item';
-//       itemnft.innerHTML = `
-//   <button class='nft-close' onclick="document.querySelector('.nft-item').remove()">×</button>
-  
-//     <div class='row'>
-//       <div class='col-6 firstCol'>
-//         <img src='${data.nft.display_image_url}' class='nftSingleImg' alt='nft'/>
-//       </div>
-//       <div class='col-6 secondCol'>
-//         <h2>${data.nft.name}</h2>
-//         <p>${data.nft.collection} | Owner : ${data.nft.contract}</p>
-//       </div>
-
-//   </div>
-// `;
-
-//       itemnft.appendChild(nftData);
-
-//       div.insertBefore(itemnft, banner);
-//       // div.insertBefore(document.createElement('div')).innerHTML = `<div class='item-div'><div class='nft-item'></div></div>`, banner)
-
-      
-      
-    } catch (error) {
-      console.error("Error fetching NFT data:", error);
-
-    }
+    navigate(`/nft/${nftContract}/${nftId}`);
   }
 
   useEffect(() => {
@@ -106,10 +82,10 @@ const NftCollection = () => {
   return (
     <div className="nft-collection">
       <div
-        className="banner"
-        style={{ backgroundImage: `url(${nftData.banner_image_url || nftData.image_url})` }}
+        className="banner d-flex flex-column justify-content-center align-items-center"  
+        style={{ backgroundImage: `url(${nftData.banner_image_url || nftData.image_url})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
       >
-        <div className="banner-overlay">
+        <div className="banner-overlay ">
           <img src={nftData.image_url} alt="collection" className="banner-logo" />
           <h1>{nftData.name}</h1>
           <div className="banner-details">
@@ -119,13 +95,19 @@ const NftCollection = () => {
             <span>{nftData.category}</span>
           </div>
         </div>
+        <div className="banner-stats bg-success mt-3 d-flex justify-content-center align-items-center">
+          <div className="stats-item">
+            <div className="floor d-flex flex-column">
+              <p>FLOOR PRICE</p>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      <div className="collection-details">
-        {/* Optional details section */}
-      </div>
+  
 
-      <div className="nft-grid">
+      <div className="nft-grid" style={{display: 'flex', flexWrap: 'wrap', justifyContent:'space-between', width: '100%', marginTop: '4rem'}}>
         {nfts.length > 0 ? (
           nfts.map((nft, idx) => (
             nft.image_url == null ? null : (

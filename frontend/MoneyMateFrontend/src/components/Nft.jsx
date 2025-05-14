@@ -6,11 +6,12 @@ function nft() {
     const location = useLocation();
     const contract = location.pathname.split('/')[2];
     const id = location.pathname.split('/')[3];
-    const [nftData, setNftData] = useState([]);
-    const [nftFinanceData, setNftFinanceData] = useState([]);
+    const [nftData, setNftData] = useState(null);
+    const [nftFinanceData, setNftFinanceData] = useState(null);
     const [nftBestOffer, setNftBestOffer] = useState(); 
     const [nftPriceUsd, setNftPriceUsd] = useState();
     const [bestOfferPrice, setBestOfferPrice] = useState();
+    
 
     async function convertCurrency(value) { 
         const url = `http://localhost:8090/api/conversion/usd/ethereum`
@@ -32,7 +33,6 @@ function nft() {
                 if (!res.ok) throw new Error("Server error");
                 const data = await res.json();
                 data.nft.display_image_url = data.nft.display_image_url.replace("?w=500", "?w=3840");
-                // console.log(data.nft);
                 setNftData(data.nft);
             }
             getNftData();
@@ -45,14 +45,12 @@ function nft() {
         const getNftFinanceData = async () => {
             try {
                 if(nftData && nftData.identifier) {
-                    console.log(nftData)
                     const url = `http://localhost:8090/api/collection/${nftData.collection}/identifier/${id}/listing`
-                    console.log(url)
                     const res = await fetch(url);
                     if (!res.ok) throw new Error("Server error");   
                     const data = await res.json();
+                    console.log(data);
                     const price = await convertCurrency(data.price.current.value / Math.pow(10, data.price.current.decimals))
-                    console.log(price)
                     setNftPriceUsd(price);
                     setNftFinanceData(data);
                 }
@@ -65,13 +63,11 @@ function nft() {
         try {
             if (nftData && nftData.identifier) {
                 const getNftBestOffer = async () => {
+                    console.log(nft)
                     const url = `http://localhost:8090/api/collection/${nftData.collection}/identifier/${id}/bestOffer`
                     const res = await fetch(url);
                     if (!res.ok) throw new Error("Server error");
                     const data = await res.json();
-                    console.log(data)
-                    // const price = await convertCurrency(data.price.value / Math.pow(10, data.price.decimals))
-                    // setBestOfferPrice(price);
                     setNftBestOffer(data);
                 }
                 getNftBestOffer();
@@ -103,7 +99,7 @@ function nft() {
                                     <div className="finance"> {/* TODO: fare un get dei dati finanaziari, prendendo offerte */}
                                         <div className="container-fluid">
                                             <div className="row">
-                                                <div className="col d-flex flex-column"><p className='fs-7 text-white-50'>TOP OFFER</p></div>
+                                                <div className="col d-flex flex-column"><p className='fs-7 text-white-50'>TOP OFFER</p>{nftBestOffer ? <p>{nftBestOffer.price.value / Math.pow(10, nftBestOffer.price.decimals)} {nftBestOffer.price.currency}</p> : <p>-</p>}</div>
                                                 <div className="col d-flex flex-column"></div>
                                                 <div className="col d-flex flex-column"></div>
                                                 <div className="col d-flex flex-column"></div>
@@ -113,10 +109,10 @@ function nft() {
                                                 <div className="col">
                                                     <p className='fs-7 text-white-50'>BUY FOR</p>
                                                     <div>
-                                                        {nftFinanceData.price ?
+                                                        {nftFinanceData ?
                                                             <div className='d-flex align-items-center'>
-                                                                <p className='fs-1'>{nftFinanceData.price.current.value
-                                                                    / Math.pow(10, nftFinanceData.price.current.decimals)} {nftFinanceData.price.current.currency} </p>
+                                                                <p className='fs-1'>{(nftFinanceData.price.current.value
+                                                                    / Math.pow(10, nftFinanceData.price.current.decimals))} {nftFinanceData.price.current.currency} </p>
                                                                 <p className='fs-5 ' style={{color:"gray", marginLeft:"0.5rem"}}>(${ nftPriceUsd })</p>
                                                             </div>
                                                             : <p className='fs-2 '>-</p>}
