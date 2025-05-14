@@ -8,6 +8,22 @@ function nft() {
     const id = location.pathname.split('/')[3];
     const [nftData, setNftData] = useState([]);
     const [nftFinanceData, setNftFinanceData] = useState([]);
+    const [nftBestOffer, setNftBestOffer] = useState(); 
+    const [nftPriceUsd, setNftPriceUsd] = useState();
+    const [bestOfferPrice, setBestOfferPrice] = useState();
+
+    async function convertCurrency(value) { 
+        const url = `http://localhost:8090/api/conversion/usd/ethereum`
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("Server error");
+        const data = await res.json();
+        const price = new Intl.NumberFormat('en', {
+            notation: 'compact',
+            maximumFractionDigits: 2,
+        }).format((value * data.ethereum.usd));
+        return price;
+    }
+
 
     useEffect(() => {
         try {
@@ -16,7 +32,7 @@ function nft() {
                 if (!res.ok) throw new Error("Server error");
                 const data = await res.json();
                 data.nft.display_image_url = data.nft.display_image_url.replace("?w=500", "?w=3840");
-                console.log(data.nft);
+                // console.log(data.nft);
                 setNftData(data.nft);
             }
             getNftData();
@@ -28,19 +44,46 @@ function nft() {
     useEffect(() => { 
         const getNftFinanceData = async () => {
             try {
-                const res = await fetch(`http://localhost:8090/api/collection/${nftData.collection}/identifier/${id}/listing
-                    `);
-                if (!res.ok) throw new Error("Server error");
-                const data = await res.json();
-                console.log(data.price.current);
-                setNftFinanceData(data);
+                if(nftData && nftData.identifier) {
+                    console.log(nftData)
+                    const url = `http://localhost:8090/api/collection/${nftData.collection}/identifier/${id}/listing`
+                    console.log(url)
+                    const res = await fetch(url);
+                    if (!res.ok) throw new Error("Server error");   
+                    const data = await res.json();
+                    const price = await convertCurrency(data.price.current.value / Math.pow(10, data.price.current.decimals))
+                    console.log(price)
+                    setNftPriceUsd(price);
+                    setNftFinanceData(data);
+                }
             } catch (e) { console.error(e) }
         }
         getNftFinanceData();
     }, [nftData]);
 
+    useEffect(() => { 
+        try {
+            if (nftData && nftData.identifier) {
+                const getNftBestOffer = async () => {
+                    const url = `http://localhost:8090/api/collection/${nftData.collection}/identifier/${id}/bestOffer`
+                    const res = await fetch(url);
+                    if (!res.ok) throw new Error("Server error");
+                    const data = await res.json();
+                    console.log(data)
+                    // const price = await convertCurrency(data.price.value / Math.pow(10, data.price.decimals))
+                    // setBestOfferPrice(price);
+                    setNftBestOffer(data);
+                }
+                getNftBestOffer();
+                
+            }
+        } catch (e) { console.error }
+        
+    }, [nftData])
+    
+
     return (
-        <div style={{display: "flex", justifyContent: "center", alignItems: "center", height: "calc(100vh - 76px)"}}>
+        <div style={{display: "flex", justifyContent: "center", alignItems: "center", height: "calc(100vh - 76px)",padding:"3rem"}}>
             {nftData && (
                 <div className="container-fluid" style={{ width: "100%", display: "flex", padding:"0 7rem 0 7rem"}}>
                     <div className="row gx-0" style={{width: "100%" }}>
@@ -60,7 +103,7 @@ function nft() {
                                     <div className="finance"> {/* TODO: fare un get dei dati finanaziari, prendendo offerte */}
                                         <div className="container-fluid">
                                             <div className="row">
-                                                <div className="col d-flex flex-column"></div>
+                                                <div className="col d-flex flex-column"><p className='fs-7 text-white-50'>TOP OFFER</p></div>
                                                 <div className="col d-flex flex-column"></div>
                                                 <div className="col d-flex flex-column"></div>
                                                 <div className="col d-flex flex-column"></div>
@@ -69,7 +112,15 @@ function nft() {
                                             <div className="row">
                                                 <div className="col">
                                                     <p className='fs-7 text-white-50'>BUY FOR</p>
-                                                    <div>{nftFinanceData.price ? <p className='fs-2'>{ nftFinanceData.price.current.decimals} {nftFinanceData.price.current.currency} </p> : <p className='fs-2'>-</p>}</div>
+                                                    <div>
+                                                        {nftFinanceData.price ?
+                                                            <div className='d-flex align-items-center'>
+                                                                <p className='fs-1'>{nftFinanceData.price.current.value
+                                                                    / Math.pow(10, nftFinanceData.price.current.decimals)} {nftFinanceData.price.current.currency} </p>
+                                                                <p className='fs-5 ' style={{color:"gray", marginLeft:"0.5rem"}}>(${ nftPriceUsd })</p>
+                                                            </div>
+                                                            : <p className='fs-2 '>-</p>}
+                                                    </div>
                                                 </div>
                                             </div>
                                             <hr />

@@ -245,6 +245,7 @@ router.route("/collections/:id/nfts/:next").get((req, res) => {
 });
 
 router.route("/collection/:collection/identifier/:identifier/listing").get((req, res) => {
+  console.log(req.params)
   opensea.auth(process.env.OPENSEA_KEY);
   opensea.server("https://api.opensea.io");
   opensea
@@ -256,8 +257,23 @@ router.route("/collection/:collection/identifier/:identifier/listing").get((req,
     .catch((err) => console.error(err));
 });
 
-router.route('bestOffer/collection/:collection/identifier/:id').get((req, res) => {
-  
+router.route("/conversion/:currency/:chain").get((req, res) => { 
+  const url = `https://api.coingecko.com/api/v3/simple/price?vs_currencies=${req.params.currency}&ids=${req.params.chain}`;
+  const options = {
+    method: 'GET',
+    headers: {accept: 'application/json', 'x-cg-demo-api-key': `${process.env.COINGECKO_API_KEY}`},
+  };
+
+  console.log(req.params)
+
+  fetch(url, options)
+    .then(res => res.json())
+    .then(json => res.send(json))
+    .catch(err => console.error(err));
+})
+
+router.route('/collection/:collection/identifier/:id/bestOffer').get((req, res) => {
+  console.log("best offer") 
   opensea.auth(process.env.OPENSEA_KEY);
   opensea.server("https://api.opensea.io");
   opensea
