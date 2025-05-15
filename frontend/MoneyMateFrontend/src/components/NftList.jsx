@@ -77,7 +77,7 @@ export default function Nft() {
 
   return (
     <div className="mainDivNftPage">
-      <div className="titleDivNftPage cenHor">
+      <div className="titleDivNftPage cenHor ">
         <h1>NFT Collections</h1>
       </div>
       <div className="searchDiv w-100% d-flex justify-content-center align-items-center flex-column">
@@ -86,7 +86,7 @@ export default function Nft() {
         </div>
         <div>
           {searchResult.length > 0 ? (
-            <div className="searchResult" style={{ marginTop: "1rem"}}>
+            <div className="searchResult bg" style={{ marginTop: "1rem"}}>
               {searchResult.map((col, index) => (
                 <div key={index} className="row" onClick={() => handleRowClickNft(col.collection)}>
                   <div className="col">{col.collection}</div>

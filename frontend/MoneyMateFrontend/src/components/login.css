@@ -26,32 +26,33 @@
     /* Optional: Adds a shadow for better visibility */
     color: white;
 }
-#emailHelp{
+
+#emailHelp {
     color: white;
 }
 
-.title{
+.title {
     margin-top: 3rem;
     font-size: 2rem;
 }
 
-.divButton{
+.divButton {
     margin-top: 3rem;
     display: flex;
     justify-content: center;
 }
 
-.signuplink{
+.signuplink {
     margin-top: 1rem;
-        display: flex;
-        justify-content: center;
+    display: flex;
+    justify-content: center;
 }
 
 .divButton>.btn {
     width: 20rem;
     height: 3rem;
     background-color: transparent;
-    border: 1px solid #32CD32;;
+    border: 1px solid #32CD32;
     color: #32CD32;
 }
 
