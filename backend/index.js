@@ -245,7 +245,7 @@ router.route("/collections/:id/nfts/:next").get((req, res) => {
 });
 
 router.route("/collection/:collection/identifier/:identifier/listing").get((req, res) => {
-  console.log("listing");
+  console.log(req.params)
   opensea.auth(process.env.OPENSEA_KEY);
   opensea.server("https://api.opensea.io");
   opensea
@@ -263,6 +263,8 @@ router.route("/conversion/:currency/:chain").get((req, res) => {
     method: 'GET',
     headers: {accept: 'application/json', 'x-cg-demo-api-key': `${process.env.COINGECKO_API_KEY}`},
   };
+
+  console.log(req.params)
 
   fetch(url, options)
     .then(res => res.json())
@@ -282,15 +284,6 @@ router.route('/collection/:collection/identifier/:id/bestOffer').get((req, res) 
     .then(({ data }) => res.send(data))
     .catch((err) => console.error(err));
 });
-
-router.route('/collections/:id/stats').get((req, res) => { 
-  opensea.auth(process.env.OPENSEA_KEY);
-  opensea.server("https://api.opensea.io");
-  opensea
-    .get_collection_stats({ collection_slug: req.params.id })
-    .then(({ data }) => res.send(data))
-    .catch((err) => console.error(err));
-})
 
 var port = process.env.PORT || 8090;
 app.listen(port);

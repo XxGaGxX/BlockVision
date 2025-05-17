@@ -1,18 +1,13 @@
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './nftList.css';
 import { useNavigate } from 'react-router-dom';
 import { Rss, Search, Star, StarFill } from 'react-bootstrap-icons';
-import { useInView } from 'react-intersection-observer';
 
 export default function Nft() {
   const [nftList, setNftList] = useState([]);
   const [next, setNext] = useState("");
   const [searchResult, setSearchResult] = useState([])
   const navigate = useNavigate();
-  const [favorites, setFavorites] = useState([]);
-  const {ref, inView} = useInView({
-    threshold: 0,
-  })
 
   async function getNft() {
     const url = "http://localhost:8090/api/collections"; 
@@ -27,11 +22,6 @@ export default function Nft() {
       console.error("Errore nel fetch:", err);
     }
   }
-
-  useEffect(() => {
-    if (inView) { showMore() }
-  }
-  , [inView]);
 
   async function showMore() {
     const url = `http://localhost:8090/api/collections/next/${next}`;
@@ -54,9 +44,8 @@ export default function Nft() {
     const search = event.target.value.trim();
     if (search !== "" || search === " ") {
       const filteredNfts = nftList.filter(item =>
-        item.collection.toLowerCase().includes(search.toLowerCase())
+        item.collection.toLowerCase().startsWith(search.toLowerCase())
       );
-      console.log(filteredNfts);
       setSearchResult(filteredNfts);
     } else {
       setSearchResult([]);
@@ -77,7 +66,7 @@ export default function Nft() {
 
   return (
     <div className="mainDivNftPage">
-      <div className="titleDivNftPage cenHor">
+      <div className="titleDivNftPage cenHor ">
         <h1>NFT Collections</h1>
       </div>
       <div className="searchDiv w-100% d-flex justify-content-center align-items-center flex-column">
@@ -86,7 +75,7 @@ export default function Nft() {
         </div>
         <div>
           {searchResult.length > 0 ? (
-            <div className="searchResult" style={{ marginTop: "1rem"}}>
+            <div className="searchResult bg" style={{ marginTop: "1rem"}}>
               {searchResult.map((col, index) => (
                 <div key={index} className="row" onClick={() => handleRowClickNft(col.collection)}>
                   <div className="col">{col.collection}</div>
@@ -108,7 +97,8 @@ export default function Nft() {
           </tbody>
         </table>
         {next && (
-          <button className="loadMoreBtn" ref={ref}>
+          <button className="loadMoreBtn" onClick={showMore}>
+            Load More
           </button>
         )}
       </div>

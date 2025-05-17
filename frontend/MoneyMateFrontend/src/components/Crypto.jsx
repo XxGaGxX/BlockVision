@@ -122,12 +122,16 @@ export default function Crypto() {
             </thead>
             <tbody>
               {coins.map((coin, index) => (
-                <tr key={index} onClick={() => handleRowClick(coin.id)}>
+                <tr key={index} onClick={() => handleRowClick(coin.id)} style={{ cursor: "pointer"}}> 
                   <th scope="row">{index + 1}</th>
-                  <td>
-                    <img className="coinImg" src={coin.image} alt={coin.name} /> {coin.name}{" "}
-                    <span className="symbol">{coin.symbol}</span>
+                  <td style={{ display: "flex", alignItems: "center", justifyContent: "flex-start", gap: "0.5rem", marginTop: "0.9rem" }}>
+                    <img className="coinImg" src={coin.image} alt={coin.name} style={{ width: "24px", height: "24px" }} />
+                    <span style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                      {coin.name}
+                      <span className="symbol" style={{ fontSize: "0.8rem", color: "gray" }}>{coin.symbol}</span>
+                    </span>
                   </td>
+
                   <td>{coin.current_price} USD</td>
                   <td>{coin.price_change_percentage_1h_in_currency?.toFixed(2)}%</td>
                   <td>{coin.price_change_percentage_24h_in_currency?.toFixed(2)}%</td>
