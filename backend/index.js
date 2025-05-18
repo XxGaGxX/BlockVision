@@ -4,6 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 // import Db from "./dbcrud.js"; // Aggiungi l'estensione `.js` per i moduli ES
 import opensea from "@api/opensea";
+import { GoogleGenAI } from "@google/genai";
 
 const app = express();
 dotenv.config();
@@ -17,6 +18,16 @@ app.use("/api", router);
 router.use((request, response, next) => {
   console.log("Server in funzione...");
   next();
+});
+
+router.route("/ai").post(async (req, res) => { 
+  const ai = new GoogleGenAI({ apiKey: `${process.env.GOOGLE_API_KEY}` });
+  const query = req.body.query;
+  const response = await ai.models.generateContent({
+    model: "gemini-2.0-flash",
+    contents: query,
+  });
+  res.json(response);
 });
 
 router.route("/getchart/:id/:days").get((req, res) => {

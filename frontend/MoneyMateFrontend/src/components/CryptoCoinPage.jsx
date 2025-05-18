@@ -1,9 +1,11 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
+
 import { Chart, registerables } from "chart.js";
 import "chartjs-adapter-date-fns";
 import "./CryptoCoinPage.css";
+import {motion} from "framer-motion";
 
 Chart.register(...registerables);
 
@@ -11,10 +13,12 @@ const CryptoPage = () => {
     let [coinData, setCoinData] = useState(null);
     let [coinChartData, setCoinChartData] = useState(null);
     const [timeRange, setTimeRange] = useState(1); // Default to 1 day
-    const [setAiSuggestion, AiSuggestion] = useState('');
+    const [AiSuggestion, setAiSuggestion] = useState('');
     const location = useLocation();
     const cryptoId = location.pathname.split("/")[2];
     const chartRef = useRef(null);
+    const typedAiSuggestion = useTypingEffect(AiSuggestion, 1);
+
 
     async function getCoinData() {
         const url = `http://localhost:8090/api/coindata/${cryptoId}`;
@@ -30,34 +34,17 @@ const CryptoPage = () => {
 
     async function getAiSuggestion() {
         event.preventDefault();
-
-        const prompt = {
-            text: `Analyze objectively whether, based on the available data (current price, percentage changes, trading volume, recent trend, and other market indicators), it makes sense to buy the following cryptocurrency at this moment.
-
-Do not consider my portfolio, budget, or risk tolerance. I only want an evaluation based on objective data.
-
-The cryptocurrency is: ${cryptoId}
-
-Supporting data (examples):
-
-Current price: ${coinData.market_data.current_price.usd} $
-
-24h Change: ${coinData.market_data.price_change_percentage_24h}
-
-Provide a clear, objective, and concise analysis. If possible, include any bullish or bearish signals, technical evaluations, or behavioral patterns.`
-        };
-
-        const url = `http://localhost:8090/api/ai`;
+        const url = "http://localhost:8090/api/ai";
         try {
             const response = await fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(prompt)
+                body: JSON.stringify({ query: `tell me the market trend of ${cryptoId}, in max 600 words without bold or large text` })
             });
             const data1 = await response.json();
-            console.log(data1);
+            setAiSuggestion(data1.candidates[0].content.parts[0].text);
         } catch (e) {
             console.error(e);
         }
@@ -92,6 +79,24 @@ Provide a clear, objective, and concise analysis. If possible, include any bulli
             getCoinChartData(coinData.id, timeRange);
         }
     }, [coinData, timeRange]);
+
+    function useTypingEffect(text, speed = 18) {
+        const [displayed, setDisplayed] = useState("");
+
+        useEffect(() => {
+            setDisplayed("");
+            if (!text) return;
+            let i = 0;
+            const interval = setInterval(() => {
+                setDisplayed((prev) => prev + text[i]);
+                i++;
+                if (i >= text.length) clearInterval(interval);
+            }, speed);
+            return () => clearInterval(interval);
+        }, [text, speed]);
+
+        return displayed;
+    }
 
     useEffect(() => {
         if (coinChartData) {
@@ -151,7 +156,8 @@ Provide a clear, objective, and concise analysis. If possible, include any bulli
                             {[1, 7, 31, 365].map((range) => (
                                 <li className="page-item" key={range}>
                                     <a
-                                        className="page-link"
+                                        style={{marginLeft:"0.5rem"}}
+                                        className="page-link "
                                         href="#"
                                         onClick={() => handleTimeRangeChange(range)}
                                     >
@@ -168,7 +174,7 @@ Provide a clear, objective, and concise analysis. If possible, include any bulli
                         <h1>{coinData ? `${coinData.market_data.current_price.usd}$` : ""}</h1>
                     </div>
                     <div className="marketdata">
-                        <table className="table">
+                        <table className="w-100">
                             <tbody>
                                 <tr className="tr">
                                     <td className="td">
@@ -177,6 +183,7 @@ Provide a clear, objective, and concise analysis. If possible, include any bulli
                                             : "Loading..."}
                                     </td>
                                 </tr>
+                                <hr/>
                                 <tr className="tr">
                                     <td className="td">
                                         {coinData
@@ -184,6 +191,7 @@ Provide a clear, objective, and concise analysis. If possible, include any bulli
                                             : "Loading..."}
                                     </td>
                                 </tr>
+                                <hr />
                                 <tr className="tr">
                                     <td className="td">
                                         {coinData
@@ -191,6 +199,7 @@ Provide a clear, objective, and concise analysis. If possible, include any bulli
                                             : "Loading..."}
                                     </td>
                                 </tr>
+                                <hr />
                                 <tr className="tr">
                                     <td className="td">
                                         {coinData
@@ -198,6 +207,7 @@ Provide a clear, objective, and concise analysis. If possible, include any bulli
                                             : "Loading..."}
                                     </td>
                                 </tr>
+                                <hr />
                                 <tr className="tr">
                                     <td className="td">
                                         {coinData
@@ -205,6 +215,7 @@ Provide a clear, objective, and concise analysis. If possible, include any bulli
                                             : "Loading..."}
                                     </td>
                                 </tr>
+                                <hr />
                             </tbody>
                         </table>
                         <div className="actions">
@@ -214,7 +225,16 @@ Provide a clear, objective, and concise analysis. If possible, include any bulli
                     </div>
                 </div>
             </div>
-
+            <div className="aiSuggestion" style={{ display: "inline-block", marginTop: "1rem" }}>
+                {AiSuggestion && AiSuggestion.length > 0 ? (
+                    <div className="aiSuggestionContent" style={{ margin: "0 auto" }}>
+                        <h4 className="aiText">
+                            {typedAiSuggestion}
+                            <span className="typing-cursor" />
+                        </h4>
+                    </div>
+                ) : null}
+            </div>
             <div className="description">
                 <h2>Description</h2>
                 <p>{coinData?.description?.en || "No description available."}</p>

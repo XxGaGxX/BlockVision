@@ -31,6 +31,10 @@ body {
     line-height: 1.5;
 }
 
+.tr{
+    font-size: large;
+}
+
 /* Container principale */
 .CryptoCoinDiv {
     padding: var(--spacing-lg);
@@ -41,7 +45,7 @@ body {
 }
 
 .table {
-    background-color: #111;
+    background-color: #141414 !important;
     /* o usa lo stesso colore dello sfondo della pagina */
     color: white;
     /* testo visibile su sfondo scuro */
@@ -191,7 +195,6 @@ body {
 }
 
 .marketdata .table tr {
-    background: #000;
     /* Imposta lo sfondo della riga a nero */
     /* oppure, se vuoi usare la tua variabile di sfondo scura principale: */
     /* background: var(--bg-dark); */

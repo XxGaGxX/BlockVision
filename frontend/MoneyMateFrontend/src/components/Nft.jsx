@@ -85,12 +85,12 @@ function nft() {
     
 
     return (
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", display:"flex", justifyContent:"center", alignItems:"center"}} className='container-fluid'>
+        <div style={{ display: "flex", alignItems: "center", height: "calc(100vh - 56px)", padding:"3rem", display:"flex", justifyContent:"center", alignItems:"center"}} className='container-fluid'>
             {nftData && (
-                <div className="container-fluid" style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center", height: "100%" }}>
+                <div className="container-fluid" style={{ width: "100%", display: "flex", justifyContent: "center", height: "100%", overflowY: "auto", padding:"0"}}>
                     <div className="row col-sm-12 " style={{width: "100%" }}>
                         <div className="col" style={{ marginRight : "3rem"}}>
-                            <img src={nftData.display_image_url} alt="NFT" style={{ width: "100%", height: "auto" }} />
+                            <img src={nftData.display_image_url} alt="NFT" style={{ width: "100%", height: "auto", maxHeight:"50rem" }} />
                         </div>
                         <div className="col sm-col-12" style={{}}>
                             <div className="card" style={{ width: "100%", height: "100%", backgroundColor:"#141414", boxShadow: "0 0 0", color: "white", padding:"0"}}>
@@ -144,7 +144,7 @@ function nft() {
                                                 </div>
                                             </div>
                                             <hr />
-                                            <div className='container-fluid' style={{ marginTop: "2rem" }}>
+                                            <div className='container-fluid' style={{ marginTop: "2rem", maxHeight:"300px", overflowY:"auto"}}>
                                                 <p className='fs-7'>TRAITS : {nftData && nftData.traits ? nftData.traits.length : ""}</p>
                                                 <div className='container-fluid'>
                                                     <div className='row'>
