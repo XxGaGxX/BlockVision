@@ -17,6 +17,8 @@ import NftList from './components/NftList.jsx'
 import { AuthProvider } from './auth/AuthContext.jsx'
 import Nft from './components/nft.jsx'
 import NftCollection from './components/NftCollection.jsx'
+import contacts from './components/contacts.jsx'
+import "bootstrap-icons/font/bootstrap-icons.css"
 
 // import { AuthContext } from '../auth/AuthContext'
 // import { useContext } from 'react'
@@ -41,7 +43,6 @@ function MainApp() {
           <Route path='/nft/collections' element={<NftList />}></Route>
           <Route path='/nft/collections/:nftName' element={<NftCollection />}></Route>
           <Route path='/nft/:contract/:id' element={<Nft />}></Route>
-
         </Routes>
       </AuthProvider>
     </div>

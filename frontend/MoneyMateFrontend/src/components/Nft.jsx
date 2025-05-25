@@ -85,7 +85,7 @@ function nft() {
     
 
     return (
-        <div style={{ display: "flex", alignItems: "center", height: "calc(100vh - 56px)", padding:"3rem", display:"flex", justifyContent:"center", alignItems:"center"}} className='container-fluid'>
+        <div style={{ display: "flex", height: "calc(100vh - 56px)", padding:"3rem", justifyContent:"center", alignItems:"center"}} className='container-fluid'>
             {nftData && (
                 <div className="container-fluid" style={{ width: "100%", display: "flex", justifyContent: "center", height: "100%", overflowY: "auto", padding:"0"}}>
                     <div className="row col-sm-12 " style={{width: "100%" }}>
@@ -96,7 +96,7 @@ function nft() {
                             <div className="card" style={{ width: "100%", height: "100%", backgroundColor:"#141414", boxShadow: "0 0 0", color: "white", padding:"0"}}>
                                 <div className="card-body">
                                     <h2 className="card-title">{nftData.name ? nftData.name : `${nftData.collection} #${nftData.identifier}`}</h2>
-                                    <h6 className="card-text" style={{ marginTop: "1rem", display: "flex" }}>{nftData.collection} <p style={{ marginLeft: "0.5rem", display: "flex", color: "gray" }}>| Owned by {nftData.owners && nftData.owners.length > 0 ? nftData.owners[0].address : "Unknown"}</p></h6> {/* TODO: get dell'owner */}
+                                    <h6 className="card-text" style={{ marginTop: "1rem", display: "flex" }}>{nftData.collection} <p style={{ marginLeft: "0.5rem", display: "flex", color: "gray" }}>| Owned by {nftData.owners && nftData.owners.length > 0 ? nftData.owners[0].address : "Unknown"}</p></h6> 
                                     <p style={{width:"100"}}>
                                         <a className='btn btn-outline-dark text-light '>{ nftData.collection }</a>
                                         <a className='btn btn-outline-dark text-light ms-2' >{ nftData.collection }</a>

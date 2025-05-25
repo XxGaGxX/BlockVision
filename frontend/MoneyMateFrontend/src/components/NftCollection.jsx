@@ -97,7 +97,6 @@ const NftCollection = () => {
               <div className="nft-card" key={idx} onClick={() => handleRowClickNft(nft.identifier, nft.contract)} >
                 <img src={nft.display_image_url || nft.image_url} alt={nft.name} className="nft-img" />
                 <div className="nft-info">
-                  <h2>{nft.name}</h2>
                 </div>
               </div>
             )
