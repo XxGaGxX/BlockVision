@@ -4,6 +4,7 @@ import { AuthContext } from '../auth/AuthContext';
 import { useContext } from 'react';
 import { useLocation } from 'react-router';
 
+
 function Navbar() {
     const location = useLocation();
     const { isLogged } = useContext(AuthContext);
@@ -13,7 +14,7 @@ function Navbar() {
     const isTransparent = location.pathname.includes('/nft/collections');
 
     return (
-        <nav style={{height:"76px"}} className={`navbar ${isTransparent ? "navbar-transparent" : "navbar-default"} navbar-expand-lg`}>
+        <nav style={{ height: "76px" }} className="navbar navbar-default navbar-expand-lg" >
             <div className="container-fluid">
                 <a className="navbar-brand" href="/">
                     <img
@@ -96,8 +97,10 @@ function Navbar() {
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav >
     );
+
+ 
 }
 
 export default Navbar;

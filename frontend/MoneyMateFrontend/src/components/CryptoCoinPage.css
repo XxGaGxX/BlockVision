@@ -194,11 +194,11 @@ body {
     line-height: 1.6;
 }
 
-.marketdata .table tr {
-    /* Imposta lo sfondo della riga a nero */
-    /* oppure, se vuoi usare la tua variabile di sfondo scura principale: */
-    /* background: var(--bg-dark); */
-}
+/* .marketdata .table tr {
+    Imposta lo sfondo della riga a nero
+    oppure, se vuoi usare la tua variabile di sfondo scura principale:
+    background: var(--bg-dark);
+} */
 
 /* Responsive: fino a 768px, tutto in colonna */
 @media (max-width: 768px) {

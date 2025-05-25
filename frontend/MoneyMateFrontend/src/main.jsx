@@ -31,7 +31,7 @@ function MainApp() {
   return (
     <div className="mainDiv">
       <AuthProvider>
-        {!noNavbarRoutes.includes(location.pathname) && <Navbar />}
+        <Navbar></Navbar>
         <Routes>
           <Route path='/' element={<HomePage />}></Route>
           <Route path='/login' element={<Login />}></Route>

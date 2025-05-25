@@ -1,40 +1,64 @@
-/* Navbar.css */
+Main navbar container
 .navbar {
-    background-color: #1B1B1B;
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #1B1B1B !important;
+    z-index: 9999;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 
 .navbar-brand {
     padding-left: 50px;
+    color: white !important;
 }
+
+
+.nav-item {
+    margin: 0 5px;
+}
+
+.nav-link {
+    color: white !important;
+    margin-right: 25px;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #17f51b !important;
+}
+
 
 .last {
     padding-right: 25px;
 }
 
-.nav-link {
-    margin-right: 25px;
-}
-
-.nav-item .nav-link {
-    color: white !important;
-}
 
 .navbar .dropdown-menu {
     max-width: 200px;
-    /* Imposta una larghezza massima */
     overflow: hidden;
-    /* Evita che il contenuto esca dai bordi */
     z-index: 1050;
-    /* Assicurati che il dropdown sia sopra altri elementi */
+    background-color: #1B1B1B;
+    border: 1px solid #333;
+    margin-top: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-
-
-
 
 .navbar .dropdown-item {
     white-space: nowrap;
-    /* Evita che il testo vada a capo */
+    color: white;
+    padding: 8px 16px;
+    transition: background-color 0.3s ease;
 }
+
+.dropdown-item:hover {
+    background-color: #333 !important;
+    color: #17f51b !important;
+}
+
 
 .nav-icon {
     margin-top: 5px;
@@ -43,39 +67,55 @@
     margin-left: 10px;
     display: flex;
     align-items: center;
+    transition: color 0.3s ease;
 }
 
-.dropdown-menu {
-    background-color: #444;
-    border: none;
+.nav-icon:hover {
+    color: #17f51b;
 }
 
-.dropdown-item {
-    color: white;
+
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
-.dropdown-item:hover {
-    background-color: #555;
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3e%3cpath stroke='rgba(255, 255, 255, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
-@media (max-width: 992px) {
-    .navbar .navbar-brand {
+
+/* @media (max-width: 992px) {
+    .navbar {
+        padding: 0.5rem;
+    }
+
+    .navbar-brand {
         margin-left: 0;
-        margin-right: auto;
-        padding-left: 0;
+        padding-left: 15px;
+    }
+
+    .navbar-collapse {
+        background-color: #1B1B1B;
+                padding: 1rem;
     }
 
     #navbarNav {
         text-align: center;
     }
 
+    .nav-link {
+        margin-right: 0;
+            padding: 0.5rem 0;
+    }
+
     .last {
-        display: flex;
         padding-right: 0;
         justify-content: center;
     }
 
-    .nav-link {
-        margin-right: 0;
+    .dropdown-menu {
+        text-align: center;
+        margin: 0 auto;
     }
-}
+}  */
+
