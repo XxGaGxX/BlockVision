@@ -10,8 +10,7 @@ function Navbar() {
     const { isLogged } = useContext(AuthContext);
     const { setIsLogged } = useContext(AuthContext);
 
-    // Controlla se l'URL contiene '/nft/collections'
-    const isTransparent = location.pathname.includes('/nft/collections');
+
 
     return (
         <nav style={{ height: "76px" }} className="navbar navbar-default navbar-expand-lg" >
@@ -35,7 +34,6 @@ function Navbar() {
                 >
                     <span className="navbar-toggler-icon" />
                 </button>
-                <p className='spacer'></p>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item">

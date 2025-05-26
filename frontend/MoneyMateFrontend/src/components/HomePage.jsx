@@ -6,17 +6,11 @@ import { Display } from 'react-bootstrap-icons';
 
 function HomePage() {
     const [startAnimation, setStartAnimation] = React.useState(false);
-    const [trendingCats, setTrendingCats] = useState([])
-    const [trendingCoins, setTrendingCoins] = useState([])
-    const [trendingNFTs, settrendingNFTs] = useState([])
+
 
     React.useEffect(() => {
         setStartAnimation(true);
     }, []);
-
-    useEffect(() => {
-        getTrending()
-    }, [])
 
 
     return (
