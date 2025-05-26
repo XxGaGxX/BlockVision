@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './nftList.css';
+import './NftList.css';
 import { useNavigate } from 'react-router-dom';
 import { Rss, Search, Star, StarFill } from 'react-bootstrap-icons';
 
