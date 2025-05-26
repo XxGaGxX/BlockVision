@@ -15,7 +15,7 @@ import Contacts from './components/contacts.jsx'
 import CryptoPage from './components/CryptoCoinPage.jsx'
 import NftList from './components/NftList.jsx'
 import { AuthProvider } from './auth/AuthContext.jsx'
-import Nft from './components/nft.jsx'
+import Nft from "./components/Nft.jsx";
 import NftCollection from './components/NftCollection.jsx'
 import contacts from './components/contacts.jsx'
 import "bootstrap-icons/font/bootstrap-icons.css"
