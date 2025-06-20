@@ -46,11 +46,11 @@ function Navbar() {
                                 NFT
                             </a>
                         </li>
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <a className="nav-link" href="/news">
                                 News
                             </a>
-                        </li>
+                        </li> */}
                         <li className="nav-item">
                             <a className="nav-link" href="/contacts">
                                 Contacts

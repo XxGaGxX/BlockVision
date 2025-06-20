@@ -1,4 +1,5 @@
 {
+  "homepage": "https://XxGaGxX.github.io/BlockVision",
   "name": "moneymatefrontend",
   "private": true,
   "version": "0.0.0",
@@ -7,7 +8,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy" : "npm run builf"
+    
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.6",

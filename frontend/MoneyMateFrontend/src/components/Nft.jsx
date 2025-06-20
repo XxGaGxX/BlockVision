@@ -190,7 +190,7 @@ function nft() {
                             <div className="card bg-dark text-white p-3">
                                 <div className="card-body">
                                     <h2 className="card-title">{nftData.name || `${nftData.collection} #${nftData.identifier}`}</h2>
-                                    <div className="d-flex align-items-center mb-2">
+                                    <div className="d-flex align-items-center mb-2">    
                                         <h6 className="card-text mb-0">{nftData.collection}</h6>
                                         <p className="mb-0 ms-2 text-muted">| Owned by {nftData.owners?.[0]?.address || "Unknown"}</p>
                                     </div>

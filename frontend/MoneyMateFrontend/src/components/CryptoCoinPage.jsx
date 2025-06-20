@@ -41,7 +41,7 @@ const CryptoPage = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ query: `tell me the market trend of ${cryptoId}, in max 600 words without bold or large text` })
+                body: JSON.stringify({ query: `tell me the market trend of ${cryptoId}, in max 200 words without bold or large text` })
             });
             const data1 = await response.json();
             setAiSuggestion(data1.candidates[0].content.parts[0].text);
@@ -219,7 +219,6 @@ const CryptoPage = () => {
                             </tbody>
                         </table>
                         <div className="actions">
-                            <a href="#">OHLC Chart</a>
                             <a href="#" onClick={() => { getAiSuggestion(); }}>AI Suggestions</a>
                         </div>
                     </div>
