@@ -24,7 +24,6 @@ function nft() {
         return price;
     }
 
-
     useEffect(() => {
         try {
             const getNftData = async () => {

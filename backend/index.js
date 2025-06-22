@@ -1,10 +1,11 @@
-import express from "express";
-import bodyParser from "body-parser";
-import cors from "cors";
-import dotenv from "dotenv";
-// import Db from "./dbcrud.js"; // Aggiungi l'estensione `.js` per i moduli ES
-import opensea from "@api/opensea";
-import { GoogleGenAI } from "@google/genai";
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const dotenv = require("dotenv");
+const opensea = require("@api/opensea");
+const { GoogleGenAI } = require("@google/genai");
+
+const Db = require("./dbcrud");
 
 const app = express();
 dotenv.config();
@@ -20,7 +21,7 @@ router.use((request, response, next) => {
   next();
 });
 
-router.route("/ai").post(async (req, res) => { 
+router.route("/ai").post(async (req, res) => {
   const ai = new GoogleGenAI({ apiKey: `${process.env.GOOGLE_API_KEY}` });
   const query = req.body.query;
   const response = await ai.models.generateContent({
@@ -255,46 +256,53 @@ router.route("/collections/:id/nfts/:next").get((req, res) => {
     .catch((err) => console.error(err));
 });
 
-router.route("/collection/:collection/identifier/:identifier/listing").get((req, res) => {
-  console.log(req.params)
-  opensea.auth(process.env.OPENSEA_KEY);
-  opensea.server("https://api.opensea.io");
-  opensea
-    .get_best_listing_on_nft_v2({
-      collection_slug: req.params.collection,
-      identifier: req.params.identifier,
-    })
-    .then(({ data }) => res.send(data))
-    .catch((err) => console.error(err));
-});
+router
+  .route("/collection/:collection/identifier/:identifier/listing")
+  .get((req, res) => {
+    console.log(req.params);
+    opensea.auth(process.env.OPENSEA_KEY);
+    opensea.server("https://api.opensea.io");
+    opensea
+      .get_best_listing_on_nft_v2({
+        collection_slug: req.params.collection,
+        identifier: req.params.identifier,
+      })
+      .then(({ data }) => res.send(data))
+      .catch((err) => console.error(err));
+  });
 
-router.route("/conversion/:currency/:chain").get((req, res) => { 
+router.route("/conversion/:currency/:chain").get((req, res) => {
   const url = `https://api.coingecko.com/api/v3/simple/price?vs_currencies=${req.params.currency}&ids=${req.params.chain}`;
   const options = {
-    method: 'GET',
-    headers: {accept: 'application/json', 'x-cg-demo-api-key': `${process.env.COINGECKO_API_KEY}`},
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      "x-cg-demo-api-key": `${process.env.COINGECKO_API_KEY}`,
+    },
   };
 
-  console.log(req.params)
+  console.log(req.params);
 
   fetch(url, options)
-    .then(res => res.json())
-    .then(json => res.send(json))
-    .catch(err => console.error(err));
-})
-
-router.route('/collection/:collection/identifier/:id/bestOffer').get((req, res) => {
-  console.log("best offer") 
-  opensea.auth(process.env.OPENSEA_KEY);
-  opensea.server("https://api.opensea.io");
-  opensea
-    .get_best_offer_on_nft_v2({
-      collection_slug: req.params.collection,
-      identifier: req.params.id,
-    })
-    .then(({ data }) => res.send(data))
+    .then((res) => res.json())
+    .then((json) => res.send(json))
     .catch((err) => console.error(err));
 });
+
+router
+  .route("/collection/:collection/identifier/:id/bestOffer")
+  .get((req, res) => {
+    console.log("best offer");
+    opensea.auth(process.env.OPENSEA_KEY);
+    opensea.server("https://api.opensea.io");
+    opensea
+      .get_best_offer_on_nft_v2({
+        collection_slug: req.params.collection,
+        identifier: req.params.id,
+      })
+      .then(({ data }) => res.send(data))
+      .catch((err) => console.error(err));
+  });
 
 var port = process.env.PORT || 8090;
 app.listen(port);

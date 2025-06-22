@@ -8,7 +8,7 @@ function contacts() {
           <div className="col p-5">
             <h1>Contact Us</h1>
             <p className='fs-6 mt-4'>Feel free to use
-              the form or drop us an email. Old-fashioned phone calss work too.</p>
+              the form or drop us an email. Old-fashioned phone cals work too.</p>
             <div className="container-fluid d-flex flex-column mt-4">
               <div className="d-flex">
                 <i className="bi bi-telephone"></i>

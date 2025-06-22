@@ -32,7 +32,6 @@ import CryptoJS from "crypto-js";
         const DataIscrizione = now.toISOString().slice(0, 19).replace('T', ' '); // Formatta come 'YYYY-MM-DD HH:MM:SS'
 
         Password = CryptoJS.SHA256(Password).toString(CryptoJS.enc.Hex);
-        console.log(Password);
 
         const data = {
           Nome,
